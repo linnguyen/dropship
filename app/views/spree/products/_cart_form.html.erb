@@ -31,33 +31,18 @@
 
     <% if @product.price_in(current_currency) && !@product.price.nil? %>
       <div data-hook="product_price" class="col-md-5">
-        <div id="product-price">
-          <h6 class="product-section-title"><%= Spree.t(:price) %></h6>
-          <div>
-            <span class="lead price selling" itemprop="price" content="<%= @product.price_in(current_currency).amount.to_d %>">
-              <%= display_price(@product) %>
-            </span>
-            <span itemprop="priceCurrency" content="<%= current_currency %>"></span>
-          </div>
-
-          <% if @product.master.can_supply? %>
-            <link itemprop="availability" href="https://schema.org/InStock" />
-          <% elsif @product.variants.empty? %>
-            <br />
-            <span class="out-of-stock"><%= Spree.t(:out_of_stock) %></span>
-          <% end %>
-        </div>
-
+        <!-- Remove Spree price here-->
         <% if @product.can_supply? %>
           <div class="add-to-cart">
             <br />
             <div class="input-group">
-              <%= number_field_tag :quantity, 1, class: 'title form-control', min: 1 %>
-              <span class="input-group-btn">
-                <%= button_tag class: 'btn btn-success', id: 'add-to-cart-button', type: :submit do %>
-                  <%= Spree.t(:add_to_cart) %>
-                <% end %>
-              </span>
+              <div class="qty-input">
+                  <span class="text-uppercase">QTY: </span>
+                  <%= number_field_tag :quantity, 1, class: 'input', min: 1 %>
+                  <%= button_tag class: 'btn primary-btn add-to-cart', id: 'add-to-cart-button', type: :submit do %>
+                    <%= Spree.t(:add_to_cart) %>
+                 <% end %>
+              </div>
             </div>
           </div>
         <% end %>
