@@ -5,9 +5,10 @@
     <div class="product-thumb">
      <%= link_to url, itemprop: "url" do %>
      <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
-         <%if !product.images[0].static_url.nil? %>
-            <%= image_tag(product.images[0].static_url, :size => "240x240") %>
-         <% end %>
+
+          <%= small_image(product, itemprop: "image") %><br/>
+          <%= content_tag(:span, truncate(product.name, length: 50), class: 'info', itemprop: "name", title: product.name) %>
+
      <% end %>
    </div>
    <div class="product-body">

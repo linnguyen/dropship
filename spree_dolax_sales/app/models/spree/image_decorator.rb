@@ -11,7 +11,6 @@ module Spree
 		#     callback.raw_filter.attributes == [:attachment]
 		#   end
 
-		clear_validators!
 
 		def picture_from_url(url)
           self.attachment = open(url)
