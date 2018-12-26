@@ -1,7 +1,7 @@
 <% @body_id = 'product-details' %>
 
 <% cache cache_key_for_product do %>
-<!-- section -->
+  <!-- section -->
   <div class="section">
     <!-- container -->
     <div class="container">
@@ -10,17 +10,17 @@
         <!--  Product Details -->
         <div class="product product-details clearfix">
           <div class="col-md-4">
-          <!-- replace with the spree image code -->
-          <div id="product-images" data-hook="product_images">
-            <div id="main-image" class="panel panel-default" data-hook>
-              <div class="panel-body text-center">
-                <%= product_image(@product, itemprop: "image") %>
-             </div>
+            <!-- replace with the spree image code -->
+            <div id="product-images" data-hook="product_images">
+              <div id="main-image" class="panel panel-default" data-hook>
+                <div class="panel-body text-center">
+                  <%= product_image(@product, itemprop: "image") %>
+                </div>
+              </div>
+              <div id="thumbnails" data-hook>
+                <%= render partial: 'thumbnails' %>
+              </div>
             </div>
-            <div id="thumbnails" data-hook>
-            <%= render partial: 'thumbnails' %>
-            </div>
-          </div>
           </div>
           <div class="col-md-8">
             <div class="product-body">
@@ -32,20 +32,20 @@
               <!-- <h3 class="product-price">$32.50 <del class="product-old-price">$45.00</del></h3> -->
               <!-- Remove the old format and replace with Spree format here -->
               <div id="product-price">
-                  <!-- <h6 class="product-section-title"><%= Spree.t(:price) %></h6> -->
-                  <div>
+                <!-- <h6 class="product-section-title"><%= Spree.t(:price) %></h6> -->
+                <div>
                     <span class="lead price selling" itemprop="price" content="<%= @product.price_in(current_currency).amount.to_d %>">
                      <b> <%= display_price(@product) %> </b>
                     </span>
-                    <span itemprop="priceCurrency" content="<%= current_currency %>"></span>
-                  </div>
+                  <span itemprop="priceCurrency" content="<%= current_currency %>"></span>
+                </div>
 
-                  <% if @product.master.can_supply? %>
-                    <link itemprop="availability" href="https://schema.org/InStock" />
-                  <% elsif @product.variants.empty? %>
-                    <br />
-                    <span class="out-of-stock"><%= Spree.t(:out_of_stock) %></span>
-                  <% end %>
+                <% if @product.master.can_supply? %>
+                  <link itemprop="availability" href="https://schema.org/InStock" />
+                <% elsif @product.variants.empty? %>
+                  <br />
+                  <span class="out-of-stock"><%= Spree.t(:out_of_stock) %></span>
+                <% end %>
               </div>
               <div>
                 <div class="product-rating">
@@ -79,13 +79,13 @@
               </div>
 
               <div class="product-btns">
-               <!--  <div class="qty-input">
-                  <span class="text-uppercase">QTY: </span>
-                  <input class="input" type="number">
-                </div> -->
+                <!--  <div class="qty-input">
+                   <span class="text-uppercase">QTY: </span>
+                   <input class="input" type="number">
+                 </div> -->
                 <!-- <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button> -->
                 <div id="cart-form" data-hook="cart_form">
-                   <%= render partial: 'cart_form' %>
+                  <%= render partial: 'cart_form' %>
                 </div>
                 <div class="pull-right">
                   <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
@@ -104,27 +104,29 @@
               </ul>
               <div class="tab-content">
                 <div id="tab1" class="tab-pane fade in active">
-                   <%= product_description(@product) %>
+                  <%= product_description(@product) %>
                 </div>
                 <div id="tab2" class="tab-pane fade in">
                   <div data-hook="product_properties">
                     <%= render partial: 'properties' %>
                   </div>
-               </div>
+                </div>
+              </div>
             </div>
           </div>
+          <!-- /Product Details -->
         </div>
-        <!-- /Product Details -->
+        <!-- /row -->
       </div>
-      <!-- /row -->
+      <!-- /container -->
     </div>
-    <!-- /container -->
+    <!-- /section -->
   </div>
-  <!-- /section -->
 
   <!-- Related Product -->
-    <div id="taxon-crumbs" class=" five " data-hook="product_taxons">
-      <%= render partial: 'taxons' %>
-    </div>
+  <div id="taxon-crumbs" class=" five " data-hook="product_taxons">
+    <%= render partial: 'taxons' %>
+  </div>
   <!-- Related Profuct -->
+
 <% end %>
