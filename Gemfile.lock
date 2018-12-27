@@ -404,7 +404,7 @@ DEPENDENCIES
   selenium-webdriver
   spree (~> 3.6.4)
   spree_auth_devise (~> 3.3)
-  spree_dolax_sales!
+  spree_dolax_sales (= 0.0.1.alpha)!
   spree_gateway (~> 3.3)
   spring
   spring-watcher-listen (~> 2.0.0)
