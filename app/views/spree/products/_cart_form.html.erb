@@ -39,10 +39,11 @@
               <div class="qty-input">
                   <span class="text-uppercase">QTY: </span>
                   <%= number_field_tag :quantity, 1, class: 'input', min: 1 %>
-                  <%= button_tag class: 'btn primary-btn add-to-cart', id: 'add-to-cart-button', type: :submit do %>
-                    <%= Spree.t(:add_to_cart) %>
-                 <% end %>
               </div>
+              <%= button_tag class: 'btn primary-btn add-to-cart', id: 'add-to-cart-button', type: :submit do %>
+                  <i class="fa fa-shopping-cart"></i>
+                  <%= Spree.t(:add_to_cart) %>
+              <% end %>
             </div>
           </div>
         <% end %>
