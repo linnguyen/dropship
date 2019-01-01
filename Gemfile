@@ -41,7 +41,7 @@ gem 'spree_gateway', '~> 3.3'
 
 gem "font-awesome-rails"
 
-gem 'spree_dolax_sales', '0.0.1.alpha', path: '../dropship/spree_dolax_sales'
+gem 'spree_dolax_sales', '0.0.1.alpha', path: '../www/spree_dolax_sales'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

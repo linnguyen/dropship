@@ -84,6 +84,8 @@ test:
 #
 production:
   <<: *default
-  database: dropship_production
-  username: dropship
-  password: <%= ENV['DROPSHIP_DATABASE_PASSWORD'] %>
+  host: localhost
+  adapter: postgresql
+  database: dropship
+  username: deploy
+  password: trieuphu1994
