@@ -4,7 +4,7 @@
 		<div id="top-header">
 			<div class="container">
 				<div class="pull-left">
-					<span>Welcome to Dolax!</span>
+					<span>Shop what you want!</span>
 				</div>
 				<div class="pull-right">
 		 			<ul class="header-top-links">
@@ -22,9 +22,9 @@
 				<div class="pull-left">
 					<!-- Logo -->
 					<div class="header-logo">
-						<a class="logo" href="#">
-              <%= image_tag 'logo.png' %>
-						</a>
+						<%= link_to  spree.root_path, class: "logo" do %>
+                            <%= image_tag 'logo.png' %>
+                        <% end %>
 					</div>
 					<!-- /Logo -->
           <!-- Search -->

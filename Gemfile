@@ -43,6 +43,8 @@ gem "font-awesome-rails"
 
 gem 'spree_dolax_sales', '0.0.1.alpha', path: '../dropship/spree_dolax_sales'
 
+gem 'spree_paypal_express', github: 'spree-contrib/better_spree_paypal_express'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
