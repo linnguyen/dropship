@@ -29,10 +29,7 @@
                 <span class="sale">-20%</span>
               </div>
               <h2 class="product-name"><%= @product.name %></h2>
-              <!-- <h3 class="product-price">$32.50 <del class="product-old-price">$45.00</del></h3> -->
-              <!-- Remove the old format and replace with Spree format here -->
               <div id="product-price">
-                <!-- <h6 class="product-section-title"><%= Spree.t(:price) %></h6> -->
                 <div>
                     <span class="lead price selling" itemprop="price" content="<%= @product.price_in(current_currency).amount.to_d %>">
                      <b> <%= display_price(@product) %> </b>
@@ -58,44 +55,25 @@
                 <a href="#">3 Review(s) / Add Review</a>
               </div>
               <p><strong>Availability:</strong> In Stock</p>
-              <p><strong>Brand:</strong> DOLAX</p>
-              <!-- For future use -->
-              <!--  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
-              <div class="product-options">
-                <ul class="size-option">
-                  <li><span class="text-uppercase">Size:</span></li>
-                  <li class="active"><a href="#">S</a></li>
-                  <li><a href="#">XL</a></li>
-                  <li><a href="#">SL</a></li>
-                </ul>
-                <ul class="color-option">
-                  <li><span class="text-uppercase">Color:</span></li>
-                  <li class="active"><a href="#" style="background-color:#475984;"></a></li>
-                  <li><a href="#" style="background-color:#8A2454;"></a></li>
-                  <li><a href="#" style="background-color:#BF6989;"></a></li>
-                  <li><a href="#" style="background-color:#9A54D8;"></a></li>
-                </ul>
-              </div>
-
               <div class="product-btns">
-                <!--  <div class="qty-input">
-                   <span class="text-uppercase">QTY: </span>
-                   <input class="input" type="number">
-                 </div> -->
-                <!-- <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button> -->
                 <div id="cart-form" data-hook="cart_form">
                   <%= render partial: 'cart_form' %>
                 </div>
-                <div class="pull-right">
-                  <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-                  <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                  <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
-                </div>
+              </div>
+              <div class="payment-policy">
+                <p><strong>Return Policy:</strong> You can return it to us within 3 days after delivery or 30 days after shipment in case the delivery date is not traceable</p>
+                 <ul class="color-option">
+                  <li><p><strong>Payment:</strong></li>
+                  <i class="fa fa-cc-paypal" style="color:navy;"></i>
+                  <i class="fa fa-cc-visa" style="color:navy;"></i>
+                  <i class="fa fa-cc-amex" style="color:blue;"></i>
+                  <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                  <i class="fa fa-cc-discover" style="color:orange;"></i>
+                </ul>
               </div>
             </div>
           </div>
-          <div class="col-md-12">
+          <div class="col-md-12 top80">
             <div class="product-tab">
               <ul class="tab-nav">
                 <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>

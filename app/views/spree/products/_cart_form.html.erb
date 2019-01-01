@@ -2,7 +2,7 @@
   <div class="row" id="inside-product-cart-form" data-hook="inside_product_cart_form" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
     <% if @product.variants_and_option_values(current_currency).any? %>
       <div id="product-variants" class="col-md-6">
-        <h3 class="product-section-title"><%= Spree.t(:variants) %></h3>
+        <p><strong><%= Spree.t(:variants)+":" %></strong></p>
         <ul class="list-group">
           <% @product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
             <li>
@@ -40,7 +40,7 @@
                   <span class="text-uppercase">QTY: </span>
                   <%= number_field_tag :quantity, 1, class: 'input', min: 1 %>
               </div>
-              <%= button_tag class: 'btn primary-btn add-to-cart', id: 'add-to-cart-button', type: :submit do %>
+              <%= button_tag class: 'primary-btn add-to-cart', id: 'add-to-cart-button', type: :submit do %>
                   <i class="fa fa-shopping-cart"></i>
                   <%= Spree.t(:add_to_cart) %>
               <% end %>

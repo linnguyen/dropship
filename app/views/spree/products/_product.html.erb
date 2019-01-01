@@ -4,7 +4,7 @@
   <div class="product product-single">
     <div class="product-thumb">
      <%= link_to url, itemprop: "url" do %>
-     <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
+          <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> View</button>
           <%= product_image(product, itemprop: "image") %><br/>
      <% end %>
    </div>
@@ -17,7 +17,9 @@
       <i class="fa fa-star"></i>
       <i class="fa fa-star-o empty"></i>
     </div>
-    <h2 class="product-name"><a href="#"><%= content_tag(:span, truncate(product.name, length: 50), class: 'info', itemprop: "name", title: product.name) %></a></h2>
+    <%= link_to url, itemprop: "url" do %>
+        <%= content_tag(:span, truncate(product.name, length: 50), class: 'info', itemprop: "name", title: product.name) %>
+    <% end %>
   </div>
 </div>
 </div>

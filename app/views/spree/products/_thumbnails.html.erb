@@ -12,7 +12,7 @@
       <% @product.variant_images.each do |i| %>
         <% next if @product.images.include?(i) %>
         <li class='vtmb tmb-<%= i.viewable.id %>'>
-          <% img_tag = image_tag(main_app.url_for(i.url(:mini)), class: "thumbnail", alt: set_image_alt(i, :mini)) %>
+          <% img_tag = image_tag(main_app.url_for(i.url(:mini)), class: "thumbnail", alt: "Dolax Image") %>
           <%= link_to(img_tag, main_app.url_for(i.url(:product))) %>
         </li>
       <% end %>
