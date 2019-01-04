@@ -7,13 +7,13 @@
           <% @product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
             <li>
               <%= radio_button_tag "variant_id", variant.id, index == 0,
-                  'data-price' => variant.price_in(current_currency).money,
-                  'data-in-stock' => variant.can_supply?
+                                   'data-price' => variant.price_in(current_currency).money,
+                                   'data-in-stock' => variant.can_supply?
               %>
               <%= label_tag "variant_id_#{ variant.id }" do %>
-                <span class="variant-description">
-                  <%= variant_options variant %>
-                </span>
+                            <span class="variant-description">
+                              <%= variant_options variant %>
+                            </span>
                 <% if variant_price variant %>
                   <span class="price diff"><%= variant_price variant %></span>
                 <% end %>
@@ -30,19 +30,19 @@
     <% end %>
 
     <% if @product.price_in(current_currency) && !@product.price.nil? %>
-      <div data-hook="product_price" class="col-md-5">
+      <div data-hook="product_price" class="col-md-8">
         <!-- Remove Spree price here-->
         <% if @product.can_supply? %>
           <div class="add-to-cart">
             <br />
             <div class="input-group">
               <div class="qty-input">
-                  <span class="text-uppercase">QTY: </span>
-                  <%= number_field_tag :quantity, 1, class: 'input', min: 1 %>
+                <span class="text-uppercase">QTY: </span>
+                <%= number_field_tag :quantity, 1, class: 'input', min: 1 %>
               </div>
               <%= button_tag class: 'primary-btn add-to-cart', id: 'add-to-cart-button', type: :submit do %>
-                  <i class="fa fa-shopping-cart"></i>
-                  <%= Spree.t(:add_to_cart) %>
+                <i class="fa fa-shopping-cart"></i>
+                <%= Spree.t(:add_to_cart) %>
               <% end %>
             </div>
           </div>
@@ -52,9 +52,9 @@
       <div id="product-price">
         <br />
         <div>
-          <span class="price selling" itemprop="price">
-            <%= Spree.t('product_not_available_in_this_currency') %>
-          </span>
+           <span class="price selling" itemprop="price">
+             <%= Spree.t('product_not_available_in_this_currency') %>
+           </span>
         </div>
       </div>
     <% end %>
