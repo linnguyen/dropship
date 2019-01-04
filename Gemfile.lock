@@ -8,6 +8,14 @@ GIT
       spree_core (>= 3.1.0, < 4.0)
       spree_extension
 
+GIT
+  remote: https://github.com/spree-contrib/spree_related_products.git
+  revision: 0c7c71989cb0ccc4294e0452c9829a824c25df11
+  specs:
+    spree_related_products (3.3.0)
+      spree_backend (>= 3.1.0, < 4.0)
+      spree_extension
+
 PATH
   remote: spree_dolax_sales
   specs:
@@ -423,6 +431,7 @@ DEPENDENCIES
   spree_dolax_sales (= 0.0.1.alpha)!
   spree_gateway (~> 3.3)
   spree_paypal_express!
+  spree_related_products!
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
