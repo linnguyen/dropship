@@ -8,13 +8,13 @@ module Spree
 
 				 
 		#   _validate_callbacks.reject do |callback|
-		#     callback.raw_filter.attributes == [:attachment]
+		#     callback.raw_ter.attributes == [:attachment]
 		#   end
 
 
 		def picture_from_url(url)
-          self.attachment = open(url)
-        end
+			 self.attachment = open(url)
+		end
 	end
 end
 

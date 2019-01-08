@@ -5,7 +5,7 @@ Spree::Core::Engine.add_routes do
         post "/image_url" => "images#upload_image_using_static_url"
         
         resources :products do
-          post"/image_upload" => "images#create_v1" 
+          post"/image_upload" => "images#create_image_via_url"
         end
     end
   end
