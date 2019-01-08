@@ -47,6 +47,8 @@ gem 'spree_paypal_express', github: 'spree-contrib/better_spree_paypal_express'
 
 gem 'spree_related_products', github: 'spree-contrib/spree_related_products'
 
+gem 'spree_reviews', github: 'spree-contrib/spree_reviews'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
