@@ -30,9 +30,9 @@
               <h3 class="product-price"><%= display_price(@product) %></h3>
               <div id="product-price">
                 <% if @product.master.can_supply? %>
-                  <link itemprop="availability" href="https://schema.org/InStock" />
+                  <link itemprop="availability" href="https://schema.org/InStock"/>
                 <% elsif @product.variants.empty? %>
-                  <br />
+                  <br/>
                   <span class="out-of-stock"><%= Spree.t(:out_of_stock) %></span>
                 <% end %>
               </div>
@@ -58,7 +58,8 @@
 
               <!-- return and payment policy -->
               <div class="payment-policy">
-                <p><strong>Return Policy:</strong> You can return it to us within 3 days after delivery or 30 days after shipment in case the delivery date is not traceable</p>
+                <p><strong>Return Policy:</strong> You can return it to us within 3 days after delivery or 30 days after
+                  shipment in case the delivery date is not traceable</p>
                 <ul class="color-option">
                   <li><p><strong>Payment:</strong></li>
                   <i class="fa fa-cc-paypal" style="color:navy;"></i>
@@ -114,8 +115,11 @@
                             </div>
                           </div>
                           <div class="review-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                              irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                              incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud
+                              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
+                              irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                              pariatur.</p>
                           </div>
                         </div>
 
@@ -132,8 +136,11 @@
                             </div>
                           </div>
                           <div class="review-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                              irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                              incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud
+                              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
+                              irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                              pariatur.</p>
                           </div>
                         </div>
 
@@ -150,8 +157,11 @@
                             </div>
                           </div>
                           <div class="review-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                              irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                              incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud
+                              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
+                              irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                              pariatur.</p>
                           </div>
                         </div>
 
@@ -197,36 +207,38 @@
         <!-- section title -->
 
         <%
-          url = spree.product_path(@product)
           tx = @product.taxons
           products = Spree::Product.in_taxons(tx)
           products = products.order("RANDOM()").limit(4)
         %>
         <% products.each do |product| %>
-        <!-- Product Single -->
-        <div class="col-md-3 col-sm-6 col-xs-6">
-          <div class="product product-single">
-            <div class="product-thumb">
-              <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> View</button>
-              <%= product_image(product, itemprop: "image") %><br/>
-            </div>
-            <div class="product-body">
-              <h3 class="product-price">$32.50</h3>
-              <div class="product-rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
+          <% url = spree.product_path(product) %>
+          <!-- Product Single -->
+          <div class="col-md-3 col-sm-6 col-xs-6">
+            <div class="product product-single">
+              <div class="product-thumb">
+                <%= link_to url, itemprop: "url" do %>
+                  <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> View</button>
+                  <%= product_image(product, itemprop: "image") %><br/>
+                <% end %>
               </div>
-             <!-- <h2 class="product-name"><a href="#"><%#= product.name %></a></h2>-->
-              <%= link_to url, itemprop: "url" do %>
-                <%= content_tag(:span, truncate(product.name, length: 50), class: 'info', itemprop: "name", title: product.name) %>
-              <% end %>
+              <div class="product-body">
+                <h3 class="product-price">$32.50</h3>
+                <div class="product-rating">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </div>
+                <!-- <h2 class="product-name"><a href="#"><%#= product.name %></a></h2>-->
+                <%= link_to url, itemprop: "url" do %>
+                  <%= content_tag(:span, truncate(product.name, length: 50), class: 'info', itemprop: "name", title: product.name) %>
+                <% end %>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- /Product Single -->
+          <!-- /Product Single -->
         <% end %>
       </div>
       <!-- /row -->
