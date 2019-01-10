@@ -30,9 +30,23 @@
         <div class="footer">
           <h3 class="footer-header">Payment & Shipping</h3>
           <ul class="list-links">
-            <li><a href="#">My Account</a></li>
-            <li><a href="#">Shopping</a></li>
-            <li><a href="#">Login</a></li>
+            <li>
+              <%= link_to spree.account_path do %>
+                My Account
+              <% end %>
+            </li>
+            <li>
+              <%= link_to spree.root_path do %>
+                Shopping
+              <% end %>
+            </li>
+            <li>
+              <% if spree_current_user %>
+                <%= link_to Spree.t(:logout), spree.logout_path%>
+              <% else %>
+                <%= link_to Spree.t(:login), spree.login_path %> / <%= link_to Spree.t(:join), spree.signup_path %>
+              <% end %>
+            </li>
           </ul>
         </div>
       </div>
