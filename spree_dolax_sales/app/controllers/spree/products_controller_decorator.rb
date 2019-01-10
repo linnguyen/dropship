@@ -6,6 +6,9 @@ module Spree
     #   @review = Spree::Review.new(product: @product)
     #   authorize! :create, @review
     # end
+    #
 
+    def shipping_return
+    end
   end
 end
