@@ -36,16 +36,6 @@
                   <span class="out-of-stock"><%= Spree.t(:out_of_stock) %></span>
                 <% end %>
               </div>
-              <div>
-                <div class="product-rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <a href="#">3 Review(s) / Add Review</a>
-              </div>
               <p><strong>Availability:</strong> In Stock</p>
 
               <!-- This one  may caused broken responsice page -->
@@ -99,84 +89,7 @@
                   <%= render partial: 'properties' %>
                 </div>
                 <div id="tab3" class="tab-pane fade in">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="product-reviews">
-                        <div class="single-review">
-                          <div class="review-heading">
-                            <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                            <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                            <div class="review-rating pull-right">
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star-o empty"></i>
-                            </div>
-                          </div>
-                          <div class="review-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                              incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud
-                              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                              irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                              pariatur.</p>
-                          </div>
-                        </div>
-
-                        <div class="single-review">
-                          <div class="review-heading">
-                            <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                            <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                            <div class="review-rating pull-right">
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star-o empty"></i>
-                            </div>
-                          </div>
-                          <div class="review-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                              incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud
-                              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                              irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                              pariatur.</p>
-                          </div>
-                        </div>
-
-                        <div class="single-review">
-                          <div class="review-heading">
-                            <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                            <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                            <div class="review-rating pull-right">
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star-o empty"></i>
-                            </div>
-                          </div>
-                          <div class="review-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                              incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud
-                              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                              irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                              pariatur.</p>
-                          </div>
-                        </div>
-
-                        <ul class="reviews-pages">
-                          <li class="active">1</li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                          <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <%= render 'spree/reviews/form', review: @review, product: @product %>
-
-                    </div>
+                  <div class="row" data-hook="product_reviews_go_after_here">
                   </div>
                 </div>
               </div>
