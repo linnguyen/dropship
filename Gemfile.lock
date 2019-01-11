@@ -9,6 +9,13 @@ GIT
       spree_extension
 
 GIT
+  remote: https://github.com/spree-contrib/spree_contact_us
+  revision: 1c5dc62a363d978e6bc197e400b1e2122ac2916e
+  specs:
+    spree_contact_us (3.3.0)
+      spree_core (>= 3.1.0, < 4.0)
+
+GIT
   remote: https://github.com/spree-contrib/spree_related_products.git
   revision: 0c7c71989cb0ccc4294e0452c9829a824c25df11
   specs:
@@ -437,6 +444,7 @@ DEPENDENCIES
   selenium-webdriver
   spree (~> 3.6.4)
   spree_auth_devise (~> 3.3)
+  spree_contact_us!
   spree_dolax_sales (= 0.0.1.alpha)!
   spree_gateway (~> 3.3)
   spree_paypal_express!

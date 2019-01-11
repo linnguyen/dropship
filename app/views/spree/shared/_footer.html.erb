@@ -61,7 +61,7 @@
           <ul class="list-links">
             <li><a href="#">About Us</a></li>
             <li><%= link_to "Shipping and Return", spree.shipping_return_path %></li>
-            <li><a href="#">Shiping Guide</a></li>
+            <li><%= link_to Spree.t(:contact_us_title), spree.new_contact_path  %></li>
             <li><a href="#">FAQ</a></li>
           </ul>
         </div>
