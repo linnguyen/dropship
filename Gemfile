@@ -43,13 +43,13 @@ gem "font-awesome-rails"
 
 gem 'spree_dolax_sales', '0.0.1.alpha', path: '../dropship/spree_dolax_sales'
 
-gem 'spree_paypal_express', github: 'spree-contrib/better_spree_paypal_express'
-
 gem 'spree_related_products', github: 'spree-contrib/spree_related_products'
 
 gem 'spree_reviews', github: 'spree-contrib/spree_reviews'
 
 gem 'spree_contact_us', :git => 'https://github.com/spree-contrib/spree_contact_us'
+
+gem 'spree_braintree_vzero', github: 'spree-contrib/spree_braintree_vzero'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

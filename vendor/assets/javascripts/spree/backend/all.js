@@ -10,5 +10,5 @@
 
 //= require_tree .
 //= require spree/backend/spree_dolax_sales
-//= require spree/backend/spree_paypal_express
 //= require spree/backend/spree_reviews
+//= require spree/backend/spree_braintree_vzero

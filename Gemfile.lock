@@ -1,12 +1,14 @@
 GIT
-  remote: https://github.com/spree-contrib/better_spree_paypal_express.git
-  revision: 962a789738b59f440bf44ea22e64b65cc2572535
+  remote: https://github.com/spree-contrib/spree_braintree_vzero.git
+  revision: 532509a226b0a984da92b87318908d002688a435
   specs:
-    spree_paypal_express (3.3.0)
-      paypal-sdk-merchant
-      spree_auth_devise (>= 3.1.0, < 4.0)
+    spree_braintree_vzero (3.4.0)
+      braintree (>= 2.40.0)
+      spree_backend (>= 3.1.0, < 4.0)
       spree_core (>= 3.1.0, < 4.0)
       spree_extension
+      spree_frontend (>= 3.1.0, < 4.0)
+      whenever
 
 GIT
   remote: https://github.com/spree-contrib/spree_contact_us
@@ -109,6 +111,8 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    braintree (2.93.0)
+      builder (>= 2.0.0)
     builder (3.2.3)
     byebug (10.0.2)
     camertron-eprun (1.1.1)
@@ -130,6 +134,7 @@ GEM
     chromedriver-helper (2.1.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
+    chronic (0.10.2)
     cldr-plurals-runtime-rb (1.0.1)
     climate_control (0.2.0)
     coffee-rails (4.2.2)
@@ -230,11 +235,6 @@ GEM
       terrapin (~> 0.6.0)
     paranoia (2.4.1)
       activerecord (>= 4.0, < 5.3)
-    paypal-sdk-core (0.3.4)
-      multi_json (~> 1.0)
-      xml-simple
-    paypal-sdk-merchant (1.117.2)
-      paypal-sdk-core (~> 0.3.0)
     pg (1.1.3)
     polyglot (0.3.5)
     premailer (1.11.1)
@@ -421,7 +421,8 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
-    xml-simple (1.1.5)
+    whenever (0.10.0)
+      chronic (>= 0.6.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -444,10 +445,10 @@ DEPENDENCIES
   selenium-webdriver
   spree (~> 3.6.4)
   spree_auth_devise (~> 3.3)
+  spree_braintree_vzero!
   spree_contact_us!
   spree_dolax_sales (= 0.0.1.alpha)!
   spree_gateway (~> 3.3)
-  spree_paypal_express!
   spree_related_products!
   spree_reviews!
   spring
