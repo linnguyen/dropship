@@ -141,6 +141,7 @@
     <orderEntry type="library" scope="PROVIDED" name="spree_auth_devise (v3.4.2, rbenv: 2.5.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_backend (v3.6.6, rbenv: 2.5.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_cmd (v3.6.6, rbenv: 2.5.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="spree_contact_us (v3.3.0@1c5dc6, rbenv: 2.5.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_core (v3.6.6, rbenv: 2.5.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_extension (v0.0.5, rbenv: 2.5.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_frontend (v3.6.6, rbenv: 2.5.1) [gem]" level="application" />
