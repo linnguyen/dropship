@@ -1,5 +1,5 @@
 module Spree
-  class PolicyController < Spree::BaseController
+  class PolicyController < Spree::StoreController
     def shipping_return
     end
   end

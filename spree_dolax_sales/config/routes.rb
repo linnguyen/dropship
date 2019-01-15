@@ -10,7 +10,7 @@ Spree::Core::Engine.add_routes do
     end
   end
 
-  get '/shipping_return', to: 'products#shipping_return'
+  get '/shipping_return', to: 'policy#shipping_return'
 end
 
 
