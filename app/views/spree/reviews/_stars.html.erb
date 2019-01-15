@@ -1,13 +1,26 @@
 <% if defined? edit_enabled
-    state = ''
-    name  = 'review[rating]'
-  else
-    state = 'disabled'
-    name  = defined?(review).nil? ? Time.now.tv_usec.to_s : "review_#{review}"
-  end %>
-<% for i in 1..Spree::Reviews::Config.stars %>
-  <input name="<%= name %>"
-         type="radio" class="star"
-         value="<%= pluralize(i, 'stars') %>" <%= state %>
-         <%= 'checked' if i == stars %> />
+     state = ''
+     name = 'review[rating]'
+   else
+     state = 'disabled'
+     name = defined?(review).nil? ? Time.now.tv_usec.to_s : "review_#{review}"
+   end %>
+<% if state %>
+  <div id="full-stars-example">
+    <div class="rating-group">
+      <input class="rating__input rating__input--none" name="rating" id="rating-none" value="0" type="radio">
+      <label aria-label="No rating" class="rating__label" for="rating-none"><i class="rating__icon rating__icon--none fa fa-ban"></i></label>
+      <% for i in 1..Spree::Reviews::Config.stars %>
+        <label aria-label="<%= i %> stars" class="rating__label" for="rating-<%= i %>"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+        <input class="rating__input" name="<%= name %>" id="rating-<%= i %>" value="<%= pluralize(i, 'stars') %>" disabled='true' type="radio" <%= 'checked' if i == stars %> >
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <% for i in 1..Spree::Reviews::Config.stars %>
+    <input name="<%= name %>"
+           type="radio" class="star"
+           value="<%= pluralize(i, 'stars') %>" <%= state %>
+           <%= 'checked' if i == stars %> />
+  <% end %>
 <% end %>
