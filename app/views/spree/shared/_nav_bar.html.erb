@@ -41,7 +41,11 @@
 								<div class="header-btns-icon">
 									<i class="fa fa-user-o"></i>
 								</div>
-								<strong class="text-uppercase">My Account <i class="fa fa-caret-down"></i></strong>
+                <% if spree_current_user %>
+                  <strong>Hi, <%= spree_current_user.first_name %><i class="fa fa-caret-down"></i></strong>
+                <% else %>
+                  <strong class="text-uppercase">My Account <i class="fa fa-caret-down"></i></strong>
+                <% end %>
 							</div>
 							<% if spree_current_user %>
 							   <%= link_to Spree.t(:logout), spree.logout_path, class: "text-uppercase"%>
