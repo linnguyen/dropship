@@ -13,5 +13,4 @@
 //= require spree/frontend/spree_auth
 //= require spree/frontend/spree_dolax_sales
 //= require spree/frontend/spree_reviews
-//= require spree/frontend/spree_braintree_vzero
 //= require spree/frontend/spree_paypal_express

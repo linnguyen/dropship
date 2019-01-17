@@ -49,8 +49,6 @@ gem 'spree_reviews', github: 'spree-contrib/spree_reviews'
 
 gem 'spree_contact_us', :git => 'https://github.com/spree-contrib/spree_contact_us'
 
-gem 'spree_braintree_vzero', github: 'spree-contrib/spree_braintree_vzero'
-
 gem 'spree_paypal_express', github: 'spree-contrib/better_spree_paypal_express'
 
 group :development, :test do
