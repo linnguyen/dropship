@@ -12,3 +12,4 @@
 //= require spree/backend/spree_dolax_sales
 //= require spree/backend/spree_reviews
 //= require spree/backend/spree_braintree_vzero
+//= require spree/backend/spree_paypal_express
