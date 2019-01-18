@@ -31,12 +31,12 @@
               <div id="product-price">
                 <% if @product.master.can_supply? %>
                   <link itemprop="availability" href="https://schema.org/InStock"/>
+                  <p><strong>Availability:</strong> In Stock</p>
                 <% elsif @product.variants.empty? %>
                   <br/>
                   <span class="out-of-stock"><%= Spree.t(:out_of_stock) %></span>
                 <% end %>
               </div>
-              <p><strong>Availability:</strong> In Stock</p>
 
               <!-- This one  may caused broken responsice page -->
               <div class="product-btns">
