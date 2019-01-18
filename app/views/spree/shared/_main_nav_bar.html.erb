@@ -1,16 +1,22 @@
-<nav class="col-md-12">
-  <div id="main-nav-bar" class="navbar">
-    <ul class="nav navbar-nav" data-hook>
-      <li id="home-link" data-hook><%= link_to "Dolax", spree.root_path, class: "text-uppercase" %></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right" data-hook>
-      <li id="link-to-cart" data-hook>
-        <noscript>
-          <%= link_to_cart %>
-        </noscript>
-        &nbsp;
-      </li>
-      <script>Spree.fetch_cart()</script>
-    </ul>
+<!-- NAVIGATION -->
+<div id="navigation">
+  <!-- container -->
+  <div class="container">
+    <div id="responsive-nav">
+      <!-- category nav -->
+      <div class="category-nav show-on-click">
+        <%= link_to spree.root_path, class: 'text-uppercase' do %>
+          <span class="category-header">Dolax</span>
+        <% end %>
+      </div>
+      <!-- /category nav -->
+
+      <!-- menu nav -->
+      <div class="menu-nav">
+      </div>
+      <!-- menu nav -->
+    </div>
   </div>
-</nav>
+  <!-- /container -->
+</div>
+<!-- /NAVIGATION -->
