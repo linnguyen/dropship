@@ -1,5 +1,10 @@
 <script>
 
+    // Navigating to a page with ratings via TurboLinks shows the radio buttons
+    $(document).on('page:load', function () {
+        $('input[type=radio].star').rating();
+    });
+
     $(document).ready(function () {
 
         /* 1. Visualizing things on Hover - See next part for action on click */
