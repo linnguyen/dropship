@@ -22,6 +22,9 @@ Rails.application.configure do
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
+  config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
+
+
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
@@ -68,13 +71,22 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "dropship_#{Rails.env}"
 
-  # mail config
-  config.action_mailer.perform_caching = false
+  # SMTP mail config
 
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = {:host => "157.230.60.184"}
+  config.action_mailer.default_url_options = { host: '157.230.60.184' }
   config.action_mailer.perform_deliveries = true
-  ActionMailer::Base.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 => 465,
+      :user_name            => 'foo@gmail.com',
+      :password             => 'foo',
+      :authentication       => :login,
+      :ssl                  => true,
+      :tls                  => true,
+      :enable_starttls_auto => true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
