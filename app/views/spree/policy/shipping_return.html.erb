@@ -2,7 +2,7 @@
   <div class="mainwrapper-inner container-inner">
     <div id="detailpost-125262" class="postdetails singulardetailcontents post-125262 page type-page status-publish hentry no_thumbnail">
       <article id="post-125262" class="detailarticlecontainer"><header class="postdetail-header hidepostmeta">
-        <h1 class="post-title">Returns &amp; Refunds Policy</h1>
+        <h1 class="post-title text-center">Returns &amp; Refunds Policy</h1>
       </header>
         <div class="post-content">
           <p>If your product arrives damaged or is not working, you can return it to us within 3 days after delivery or 30 days after shipment in case the delivery date is not traceable. If your order has been shipped to Brazil or Russia, you can send it back to us within 40 days after shipment. You will receive an e-mail containing the shipment date and other details of your order after it has been shipped. Some products have different policies or requirements associated with them.</p>
@@ -10,16 +10,16 @@
           <p>We will reimburse you for the return shipping fees after the defective item has arrived in our warehouse. Any further costs incurred during the return process will be at the customer&rsquo;s expense.</p>
           <p>If the item is outside the validity period of this warranty:<br />The customer shall be held responsible for all the shipping fees and charges when returning the defective product.</p>
           <p><strong>Return a DOA (dead on arrival) item&nbsp;</strong></p>
-          <p>If the item arrived broken, please&nbsp;<strong>contact us</strong>&nbsp;within 3 days from the delivery date and follow the procedure for the 3 Days Product Guarantee.</p>
+          <p>If the item arrived broken, please&nbsp;<%= link_to ("<strong>contact us</strong>").html_safe, spree.new_contact_path %>&nbsp;within 3 days from the delivery date and follow the procedure for the 3 Days Product Guarantee.</p>
           <p>If the item has a high value, we may ask you to return it. Please include all of its accessories, like cables, chargers, batteries, in the returned parcel. If an accessory or component is missing, we will ask you to pay for it. All the return shipping fees will be covered by us.</p>
           <p><strong>Return a defective item&nbsp;</strong></p>
           <p>We will do our best to ensure that the products shipped to our customers are in their best conditions. If your product turns out to be defective, please provide us with the following proofs:</p>
           <p>&ndash; This clause does not include products of a category with specific warranty terms as well as damages caused by incorrect usage of a product.</p>
           <ul>
-            <li>Photos of the front and the back of the package or box;</li>
-            <li>Partial shipment slips (if applicable);</li>
-            <li>Photo or video of the defective item;</li>
-            <li>Photo or video and a detailed description of the problem;</li>
+            <li>+ Photos of the front and the back of the package or box;</li>
+            <li>+ Partial shipment slips (if applicable);</li>
+            <li>+ Photo or video of the defective item;</li>
+            <li>+ Photo or video and a detailed description of the problem;</li>
           </ul>
           <p><strong>Within 90 days (from the date of shipment)</strong></p>
           <p>Upon being returned, the defective item will be refunded or replaced for free. Return shipping fee reimbursement is 35% of the item&rsquo;s price up to a maximum of $40.<br />If the products malfunctions (except for reasons caused by incorrect usage and accidental or intentional damage) within 90 days after shipment, you can return the product back to us. You should receive an e-mail with the shipment date and other details after your order has been shipped. Once we receive and approve the return a full refund or replacement will be offered and a shipping cost reimbursement will be issued when you provide us with a receipt of the shipping charges you paid to send it back to us (the tracking number of the return package or a screenshot of the shipping receipt).</p>
@@ -30,11 +30,11 @@
           <p>The reimbursement of the return shipping fees will cover 35% of the price of the item up to a maximum cost of $40. We will notify you by e-mail of any expected repair costs.</p>
           <p><strong>After 180 days from shipment</strong></p>
           <p>We will not accept requests for a refund or a replacement after 180 days from shipment.</p>
-          <p>Please&nbsp;<strong>contact</strong>&nbsp;our customer service representatives for more information.</p>
+          <p>Please&nbsp;<%= link_to ("<strong>contact</strong>").html_safe, spree.new_contact_path %>&nbsp;our customer service representatives for more information.</p>
           <p><strong>Return incorrect item received</strong><br />If the item you have received differs completely from the one you ordered, please do not hesitate to&nbsp;<strong>contact</strong>&nbsp;our customer service and to provide us with the following proofs:</p>
           <ul>
-            <li>Photos&nbsp;or a video&nbsp;of&nbsp;the&nbsp;incorrect&nbsp;item;</li>
-            <li>Photos or a video showing&nbsp;the problem occurred with this product;</li>
+            <li>+ Photos&nbsp;or a video&nbsp;of&nbsp;the&nbsp;incorrect&nbsp;item;</li>
+            <li>+ Photos or a video showing&nbsp;the problem occurred with this product;</li>
           </ul>
           <p>Because different batches of the products are supplied, the item logo or packaging you received may vary from the one displayed on our website. If all the functions and appearance of the product prove to be correct, please understand that this case will not be included in this policy. If a return is necessary, replacement plus shipping cost reimbursement will be issued to you once you send us a return shipping receipt showing how much you paid to return it. Please be sure that the incorrect item you return is in the original package and the merchandise is in the same condition you received it in. For the incorrect item, if you are able to find a use of it and prefer to keep it, you may suggest that to us and we will offer you a certain discount for buying it.</p>
           <p><strong>Return unsatisfactory products</strong></p>
@@ -61,15 +61,15 @@
           <p>&ndash; We can arrange a refund or a replacement of the product after receiving the defective item;</p>
           <p>&ndash; Please place a note inside the return package by including the following details (this will accelerate your return request):</p>
           <ul>
-            <li>your order number;</li>
-            <li>the product ID or name and the quantity;</li>
-            <li>a short description of the problem occurred with this product;</li>
+            <li>+ your order number;</li>
+            <li>+ the product ID or name and the quantity;</li>
+            <li>+ a short description of the problem occurred with this product;</li>
           </ul>
           <h4><strong>Return Request:</strong></h4>
           <p>If you want to return your item to use. Please contact us at:</p>
           <ul>
             <li><strong>Email:</strong>&nbsp;support@dolax.com</li>
-            <li><a href="">Contact US&nbsp;Form</a></li>
+            <li><%= link_to "Contact Us Form", spree.new_contact_path  %></li>
           </ul>
           <p><em><strong>We will provide for you detail warehouse address of your product for return. You need to send your product to this address and provide us the tracking number. After we receive your address, We will process the refund to you.</strong></em></p>
           <p><strong>Dolaxstore.com</strong> reserves the right to make changes and/or improvements to this policy. Any changes will be updated on the forum or on the relevant section of our help center.</p>
