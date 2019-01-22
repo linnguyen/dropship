@@ -5,11 +5,13 @@ require_relative 'application'
 Rails.application.initialize!
 
 ActionMailer::Base.smtp_settings = {
-    :address              => "smtp.sendgrid.net",
-    :domain               => "http://157.230.60.184/",
-    :user_name            => ENV['SENDGRID_USERNAME'],
-    :password             => ENV['SENDGRID_PASSWORD'],
-    :authentication       => "plain",
+    :user_name => 'dolax',
+    :password => 'trieuphu1994',
+    :domain => 'http://157.230.60.184/',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
     :enable_starttls_auto => true
 }
-ActionMailer::Base.default_url_options = { host: '157.230.60.184' }
+
+

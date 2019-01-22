@@ -78,11 +78,11 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
+      :address              => "smtp.sendgrid.net",
       :port                 => 587,
-      :user_name            => 'foo@gmail.com',
-      :password             => 'foo',
-      :authentication       => :login,
+      :user_name            => 'dolax',
+      :password             => 'trieuphu1994',
+      :authentication       => :plain,
       :ssl                  => true,
       :tls                  => true,
       :enable_starttls_auto => true
