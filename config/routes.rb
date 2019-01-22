@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'tests/tes'
   # This line mounts Spree's routes at the root of your application.
   # This means, any requests to URLs such as /products, will go to
   # Spree::ProductsController.
@@ -9,4 +10,5 @@ Rails.application.routes.draw do
   # the default of "spree".
   mount Spree::Core::Engine, at: '/'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '/test', to: 'tests#tes'
 end
