@@ -17,18 +17,20 @@
 </div>
 
 <!-- section -->
-  <div class="section">
-    <!-- container -->
-    <div class="container">
+<div class="section">
+  <!-- container -->
+  <div class="container">
 
+    <div id="main" class="col-md-9">
       <% if products.any? %>
         <div id="products" class="row" data-hook>
-          <%= render partial: 'spree/products/product', collection: products, locals: { taxon: @taxon } %>
+          <%= render partial: 'spree/products/product', collection: products, locals: {taxon: @taxon} %>
         </div>
       <% end %>
-
     </div>
+
   </div>
+</div>
 
 <% if products.respond_to?(:total_pages) %>
   <%= paginate products, theme: 'twitter-bootstrap-3' %>
