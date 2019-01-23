@@ -26,6 +26,9 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 /config/database.yml
+/config/environment.rb
+/config/environments/production.rb
+
 
 .idea/workspace.xml
 	
