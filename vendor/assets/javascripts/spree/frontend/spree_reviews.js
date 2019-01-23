@@ -64,7 +64,7 @@ function responseMessage(msg) {
 }
 
 $(document).ready(function () {
-    $(".button-test-review").click(function () {
+    $(".hulahalu").click(function () {
         alert("Hello I am working")
     });
 });

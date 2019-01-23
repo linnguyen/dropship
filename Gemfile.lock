@@ -110,7 +110,6 @@ GEM
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
     builder (3.2.3)
-    byebug (10.0.2)
     camertron-eprun (1.1.1)
     cancancan (2.3.0)
     canonical-rails (0.2.4)
@@ -427,7 +426,6 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
-  byebug
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
