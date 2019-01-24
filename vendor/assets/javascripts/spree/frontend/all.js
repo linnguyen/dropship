@@ -14,10 +14,3 @@
 //= require spree/frontend/spree_dolax_sales
 //= require spree/frontend/spree_reviews
 //= require spree/frontend/spree_paypal_express
-
-
-$(document).ready(function(){
-    $(".click-me-pls").click(function(){
-        alert("The paragraph was clicked.");
-    });
-});
