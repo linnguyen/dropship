@@ -10,3 +10,6 @@ en:
   last_name: "Last name"
   contac_us: "contact us"
   about: "about"
+  update: 'Update'
+  checkout: 'Checkout'
+  save_and_continue: "Save and Continue"
