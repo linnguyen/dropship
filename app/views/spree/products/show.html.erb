@@ -27,7 +27,7 @@
                 <span class="sale">-40%</span>
               </div>
               <h2 class="product-name"><%= @product.name %></h2>
-              <h3 class="product-price"><%= display_price(@product) %> <del class="product-old-price"><%= price_before_discount(@product) %></del></h3>
+              <h3 class="product-price"><%= display_price(@product) %> <del class="product-old-price">$<%= price_before_discount(@product) %></del></h3>
               <div id="product-price">
                 <% if @product.master.can_supply? %>
                   <link itemprop="availability" href="https://schema.org/InStock"/>
