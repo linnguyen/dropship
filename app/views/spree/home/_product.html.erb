@@ -15,7 +15,12 @@
       <%= large_image(product, itemprop: "image") %><br/>
     </div>
     <div class="product-body">
-      <h3 class="product-price"><%= display_price(product) %> <del class="product-old-price">$<%= price_before_discount(product) %></del></h3>
+      <h3 class="product-price">
+        <%= display_price(product) %>
+        <% if display_discount %>
+        <del class="product-old-price">$<%= price_before_discount(product) %></del>
+        <% end %>
+      </h3>
       <div class="product-rating">
         <i class="fa fa-star"></i>
         <i class="fa fa-star"></i>

@@ -3,13 +3,23 @@
 <div class="col-md-4 col-sm-6 col-xs-6">
   <div class="product product-single">
     <div class="product-thumb">
-     <%= link_to url, itemprop: "url" do %>
-          <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> View</button>
-          <%= product_image(product, itemprop: "image") %><br/>
-     <% end %>
+      <div class="product-label">
+        <% if display_discount %>
+          <span class="sale">-40%</span>
+        <% end %>
+      </div>
+      <%= link_to url, itemprop: "url" do %>
+        <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> View</button>
+      <% end %>
+      <%= large_image(product, itemprop: "image") %><br/>
    </div>
    <div class="product-body">
-    <h3 class="product-price"> <%= display_price(product) %></h3>
+    <h3 class="product-price">
+      <%= display_price(product) %>
+      <% if display_discount %>
+        <del class="product-old-price">$<%= price_before_discount(product) %></del>
+      <% end %>
+    </h3>
     <div class="product-rating">
       <i class="fa fa-star"></i>
       <i class="fa fa-star"></i>
@@ -17,12 +27,17 @@
       <i class="fa fa-star"></i>
       <i class="fa fa-star"></i>
     </div>
-    <%= link_to url, itemprop: "url" do %>
-        <%= content_tag(:span, truncate(product.name, length: 50), class: 'info', itemprop: "name", title: product.name) %>
-    <% end %>
-  </div>
+    <p class="product-name">
+      <%= link_to url, itemprop: "url" do %>
+          <%= content_tag(:span, truncate(product.name, length: 50), class: 'info', itemprop: "name", title: product.name) %>
+      <% end %>
+    </p>
+   </div>
 </div>
 </div>
 <!-- /Product Single -->
+
+
+
 
 

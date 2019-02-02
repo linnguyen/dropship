@@ -5,7 +5,8 @@ module Spree
 
          def create_image_via_url
            authorize! :create, Image
-           file = open(params[:url])
+           encoded_url = URI.encode(params[:url])
+           file = open(encoded_url)
            @image = scope.images.create(attachment: {io: file, filename: File.basename(file.path) })
            if @image
              respond_with(@image, status: 201, default_template: :show)
