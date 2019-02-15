@@ -7,6 +7,11 @@ Spree::Core::Engine.add_routes do
       resources :products do
         post "/image_upload" => "images#create_image_via_url"
       end
+
+      resources :variants do
+        post "/image_upload" => "images#create_image_via_url"
+      end
+
       resources :option_types do
         post "/find_or_create_option_value" => "option_values#find_or_create"
       end
