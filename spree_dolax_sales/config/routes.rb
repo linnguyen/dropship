@@ -18,6 +18,11 @@ Spree::Core::Engine.add_routes do
     end
   end
 
+  namespace :admin do
+    post '/bulk', :to => 'products#bulk_upload'
+    get '/import', :to => 'products#import'
+  end
+
   get '/shipping_return', to: 'policy#shipping_return'
   get '/about', to: 'policy#about'
 end
