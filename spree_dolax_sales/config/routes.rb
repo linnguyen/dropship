@@ -23,6 +23,11 @@ Spree::Core::Engine.add_routes do
     get '/import', :to => 'products#import'
   end
 
+  post "products/:product_id/get_variant",
+       to: "products#toggle_like",
+       as: "get_variant",
+       constraints: { :format => /(js)/ }
+
   get '/shipping_return', to: 'policy#shipping_return'
   get '/about', to: 'policy#about'
 end
