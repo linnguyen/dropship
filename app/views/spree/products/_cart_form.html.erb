@@ -3,21 +3,16 @@
     <% if @product.variants_and_option_values(current_currency).any? %>
       <div id="product-variants" class="col-md-6">
         <p><strong><%= Spree.t(:variants) + ":" %></strong></p>
-        <ul class="list-group">
-          <% @product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
-            <h3 class="product-section-title"><%= Spree.t(:variants) %></h3>
-            <% @product.option_types.each do |option_type| %>
-              <%= f.label "option_type_#{option_type.id}", option_type.name %>
-              <br>
-              <%= f.select "option_type_value_#{option_type.id}",
-                           option_type.option_values.all.collect {|v| [v.name, v.id]},
-                           {include_blank: true},
-                           {class: "form-control"} %>
-              <br>
-            <% end %>
-            <%= hidden_field_tag "variant_id", value: "0" %>
-          <% end %>
-        </ul>
+        <% @product.option_types.each do |option_type| %>
+          <%= f.label "option_type_#{option_type.id}", option_type.name %>
+          <br>
+          <%= f.select "option_type_value_#{option_type.id}",
+                       option_type.option_values.all.collect {|v| [v.name, v.id]},
+                       {include_blank: true},
+                       {class: "form-control"} %>
+          <br>
+        <% end %>
+        <%= hidden_field_tag "variant_id", value: "0" %>
       </div>
     <% else %>
       <%= hidden_field_tag "variant_id", @product.master.id %>
@@ -57,17 +52,17 @@
 
 <script>
     // Call AJAX if all options are selected, otherwise clean up.
-    $("#product-variants select").change(function(){
+    $("#product-variants select").change(function () {
         var option_value_ids = [];
-        $("#product-variants select").each(function(){
+        $("#product-variants select").each(function () {
             option_value_ids.push($(this).val());
         });
-        if(option_value_ids.indexOf("") == -1){
+        if (option_value_ids.indexOf("") == -1) {
             $.ajax({
                 url: "<%= get_variant_path(@product) %>?ids=" + option_value_ids.join(','),
                 method: "post"
             });
-        }else{
+        } else {
             $("#variant_id").val("0");
             $("#add-to-cart-button").prop("disabled", true);
             $(".out-of-stock").hide();
