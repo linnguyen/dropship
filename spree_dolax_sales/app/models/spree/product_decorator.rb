@@ -2,13 +2,17 @@ module Spree
   Product.class_eval do
 
     # Find the Product's Variant from an array of OptionValue ids
-    def find_variant_by_options(array)
-      option_values = Spree::OptionValue.where(id: array)
-      variants = []
-      option_values.each do |option_value|
-        variants.push(option_value.variants.ids)
-      end
-      self.variants.find_by(:id => variants.inject(:&).first)
+    def find_variant_by_options(array_option_value_ids)
+      # option_values = Spree::OptionValue.where(id: array)
+      # variants = []
+      # option_values.each do |option_value|
+      #   variants.push(option_value.variants.ids)
+      # end
+      # self.variants.find_by(:id => variants.inject(:&).first)
+      #
+      #
+      self.variants.select { |variant| variant.option_value_ids == array_option_value_ids.map(&:to_i) }.first
+
     end
 
 

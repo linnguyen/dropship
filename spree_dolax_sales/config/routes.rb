@@ -24,7 +24,7 @@ Spree::Core::Engine.add_routes do
   end
 
   post "products/:product_id/get_variant",
-       to: "products#toggle_like",
+       to: "products#get_variant",
        as: "get_variant",
        constraints: { :format => /(js)/ }
 
