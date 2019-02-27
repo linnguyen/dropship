@@ -11,13 +11,13 @@ module Spree
       # self.variants.find_by(:id => variants.inject(:&).first)
       #
       #
-      self.variants.select { |variant| variant.option_value_ids == array_option_value_ids.map(&:to_i) }.first
+      self.variants.select {|variant| variant.option_value_ids == array_option_value_ids.map(&:to_i)}.first
 
     end
 
 
     def option_values
-      @_option_values ||= Spree::OptionValue.for_product(self).order(:position).sort_by {|ov| ov.option_type.position }
+      @_option_values ||= Spree::OptionValue.for_product(self).order(:position).sort_by {|ov| ov.option_type.position}
     end
 
     def grouped_option_values
@@ -26,7 +26,7 @@ module Spree
 
     def variants_for_option_value(value)
       @_variant_option_values ||= variants.includes(:option_values).all
-      @_variant_option_values.select { |i| i.option_value_ids.include?(value.id) }
+      @_variant_option_values.select {|i| i.option_value_ids.include?(value.id)}
     end
 
     def variant_options_hash

@@ -1,8 +1,7 @@
 <% if @product.has_variants? %>
   <div id="product-variants">
     <% index = 0 %>
-    <% @values = Spree::OptionValue.joins(:option_value_variants).where(spree_option_value_variants: {variant_id: @product.variant_ids}).group_by(&:option_type) %>
-    <% @values.each do |type, values| %>
+    <% @product.grouped_option_values.each do |type, values| %>
       <div id="<%= dom_id(type) %>" class="variant-options index-<%= index %>">
         <h6><%= type.presentation %></h6>
         <ul class="size-option <%= type.name %>">
