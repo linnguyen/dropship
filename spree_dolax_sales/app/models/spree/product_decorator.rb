@@ -1,5 +1,22 @@
 module Spree
   Product.class_eval do
+    has_many :nonuniq_variant_images, -> {order(:position)}, source: :images, through: :variants_including_master
+
+    def images_of_variants
+      images = []
+      self.variants.each do |variant|
+        variant.images.each do |image|
+          next if images.include? image
+          images << image
+        end
+      end
+      return images
+    end
+
+    def variant_images
+      variant_images = Spree::VariantImage.where(variant_id: variant_ids)
+      Spree::Image.where(id: variant_images.pluck(:image_id), viewable_type: 'Spree::Variant').order(position: :asc)
+    end
 
     # Find the Product's Variant from an array of OptionValue ids
     def find_variant_by_options(array_option_value_ids)

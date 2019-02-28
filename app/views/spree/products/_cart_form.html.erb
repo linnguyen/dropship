@@ -2,28 +2,56 @@
   <div class="row" id="inside-product-cart-form" data-hook="inside_product_cart_form" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
     <% if @product.variants_and_option_values(current_currency).any? %>
       <div id="product-variants" class="col-md-6">
-        <h3 class="product-section-title"><%= Spree.t(:variants) %></h3>
-        <ul class="list-group">
-          <% @product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
-            <li>
-              <%= radio_button_tag "variant_id", variant.id, index == 0,
-                                   'data-price' => variant.price_in(current_currency).money,
-                                   'data-in-stock' => variant.can_supply?
-              %>
-              <%= label_tag "variant_id_#{ variant.id }" do %>
-                <span class="variant-description">
-                  <%= variant_options variant %>
-                </span>
-                <% if variant_price variant %>
-                  <span class="price diff"><%= variant_price variant %></span>
+        <% if @product.has_variants? %>
+          <% index = 0 %>
+          <% @product.grouped_option_values.each do |type, values| %>
+            <div id="<%= dom_id(type) %>" class="variant-options index-<%= index %>">
+              <h6><%= type.presentation %></h6>
+              <ul class="size-option <%= type.name %>">
+                <% values.sort_by(&:position).each do |value| %>
+                  <li><a href="#"><%= value.presentation %></a></li>
                 <% end %>
-                <% unless variant.can_supply? %>
-                  <span class="out-of-stock"><%= Spree.t(:out_of_stock) %></span>
-                <% end %>
-              <% end %>
-            </li>
+              </ul>
+            </div>
+            <% index += 1 %>
           <% end %>
-        </ul>
+          <%= hidden_field_tag "variant_id", "18129292" %>
+
+          <script type="text/javascript">
+
+              // When we click on the li
+              $('.Size > li').click(function () {
+                  // If this isn't already active
+                  if (!$(this).hasClass("active")) {
+                      // Remove the class from anything that is active
+                      $(".Size > li.active").removeClass("active");
+                      // And make this active
+                      $(this).addClass("active");
+                  }
+
+                  var option_value_ids = [215, 196];
+
+                  $.ajax({
+                      url: "<%= get_variant_path(@product) %>?ids=" + option_value_ids.join(','),
+                      method: "post",
+                      success: function (data) {
+                          alert(data.toString())
+                      }
+                  });
+              });
+
+              $('.Color > li').click(function () {
+                  // If this isn't already active
+                  if (!$(this).hasClass("active")) {
+                      // Remove the class from anything that is active
+                      $(".Color > li.active").removeClass("active");
+                      // And make this active
+                      $(this).addClass("active");
+                  }
+              });
+
+          </script>
+        <% end %>
       </div>
     <% else %>
       <%= hidden_field_tag "variant_id", @product.master.id %>
@@ -61,25 +89,25 @@
   </div>
 <% end %>
 
-<script>
-    // Call AJAX if all options are selected, otherwise clean up.
-    $("#product-variants select").change(function () {
-        var option_value_ids = [];
-        $("#product-variants select").each(function () {
-            option_value_ids.push($(this).val());
-        });
-        if (option_value_ids.indexOf("") == -1) {
-            $.ajax({
-                url: "<%= get_variant_path(@product) %>?ids=" + option_value_ids.join(','),
-                method: "post"
-            });
-        } else {
-            $("#variant_id").val("0");
-            $("#add-to-cart-button").prop("disabled", true);
-            $(".out-of-stock").hide();
-        }
-    });
-</script>
+<!--<script>-->
+<!--    // Call AJAX if all options are selected, otherwise clean up.-->
+<!--    $("#product-variants select").change(function () {-->
+<!--        var option_value_ids = [];-->
+<!--        $("#product-variants select").each(function () {-->
+<!--            option_value_ids.push($(this).val());-->
+<!--        });-->
+<!--        if (option_value_ids.indexOf("") == -1) {-->
+<!--            $.ajax({-->
+<!--                url: "<%= get_variant_path(@product) %>?ids=" + option_value_ids.join(','),-->
+<!--                method: "post"-->
+<!--            });-->
+<!--        } else {-->
+<!--            $("#variant_id").val("0");-->
+<!--            $("#add-to-cart-button").prop("disabled", true);-->
+<!--            $(".out-of-stock").hide();-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
 
 <!-- reference: https://stackoverflow.com/questions/34898575/spree-dropdown-boxes-for-variant-option-values -->
 <!-- it working wrong https://github.com/citrus/spree_variant_options -->

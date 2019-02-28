@@ -1,20 +1,15 @@
 require "open-uri"
 
 module Spree
-	Image.class_eval  do
-		# validates :check_attachment_presence, :presence => true
-		# validates_attachment.reject!
-		# _validators.reject!{ |key, _| key == :attachment }
+  Image.class_eval do
+    attr_accessor :viewable_ids
 
-				 
-		#   _validate_callbacks.reject do |callback|
-		#     callback.raw_ter.attributes == [:attachment]
-		#   end
+    has_many :variant_images, class_name: '::Spree::VariantImage'
+    has_many :variants, through: :variant_images
 
-
-		def picture_from_url(url)
-			 self.attachment = open(url)
-		end
-	end
+    def variant_html_classes
+      variant_ids.map {|variant| "tmb-#{variant}"}.join(" ")
+    end
+  end
 end
 

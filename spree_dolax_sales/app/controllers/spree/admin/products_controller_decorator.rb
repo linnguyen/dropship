@@ -39,11 +39,13 @@ Spree::Admin::ProductsController.class_eval do
       doc = Nokogiri::HTML(open(url))
       data_doc = doc.css('div.pro_attr_box table tr[2] td li')
       images_hash = Hash.new
+      imageid_hash = Hash.new
       data_doc.each do |image_li|
         name_color = image_li.css('img').attr('title').value
         url = image_li.css('img').attr('viewimage').value
         images_hash[name_color] = url
       end
+
 
       options_value = row[15].split("/")
       options_value.each do |option_value|
@@ -67,7 +69,12 @@ Spree::Admin::ProductsController.class_eval do
           variant_url = images_hash[colorOptionValue.presentation]
           encoded_url = URI.encode(variant_url)
           file = open(encoded_url)
-          image = variant.images.create(attachment: {io: file, filename: File.basename(file.path)})
+          if imageid_hash.key?(colorOptionValue.presentation)
+            variant.images << Spree::Asset.find(imageid_hash[colorOptionValue.presentation])
+          else
+            image = variant.images.create(attachment: {io: file, filename: File.basename(file.path)})
+            imageid_hash[colorOptionValue.presentation] = image.id
+          end
 
         elsif (option_value.include? "Size") && !(option_value.include? "Color")
           # only size

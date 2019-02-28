@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_16_074040) do
+ActiveRecord::Schema.define(version: 2019_02_28_064300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,13 @@ ActiveRecord::Schema.define(version: 2019_01_16_074040) do
     t.index ["position"], name: "index_spree_assets_on_position"
     t.index ["viewable_id"], name: "index_assets_on_viewable_id"
     t.index ["viewable_type", "type"], name: "index_assets_on_viewable_type_and_type"
+  end
+
+  create_table "spree_assets_variants", force: :cascade do |t|
+    t.bigint "image_id"
+    t.bigint "variant_id"
+    t.index ["image_id"], name: "index_spree_assets_variants_on_image_id"
+    t.index ["variant_id"], name: "index_spree_assets_variants_on_variant_id"
   end
 
   create_table "spree_braintree_checkouts", id: :serial, force: :cascade do |t|
