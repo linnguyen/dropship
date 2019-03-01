@@ -7,50 +7,15 @@
           <% @product.grouped_option_values.each do |type, values| %>
             <div id="<%= dom_id(type) %>" class="variant-options index-<%= index %>">
               <h6><%= type.presentation %></h6>
-              <ul class="size-option <%= type.name %>">
+              <ul class="size-option <%= type.name.downcase %>">
                 <% values.sort_by(&:position).each do |value| %>
-                  <li><a href="#"><%= value.presentation %></a></li>
+                  <li id= <%= value.id %>><a href="#"><%= value.presentation %></a></li>
                 <% end %>
               </ul>
             </div>
             <% index += 1 %>
           <% end %>
           <%= hidden_field_tag "variant_id", "18129292" %>
-
-          <script type="text/javascript">
-
-              // When we click on the li
-              $('.Size > li').click(function () {
-                  // If this isn't already active
-                  if (!$(this).hasClass("active")) {
-                      // Remove the class from anything that is active
-                      $(".Size > li.active").removeClass("active");
-                      // And make this active
-                      $(this).addClass("active");
-                  }
-
-                  var option_value_ids = [215, 196];
-
-                  $.ajax({
-                      url: "<%= get_variant_path(@product) %>?ids=" + option_value_ids.join(','),
-                      method: "post",
-                      success: function (data) {
-                          alert(data.toString())
-                      }
-                  });
-              });
-
-              $('.Color > li').click(function () {
-                  // If this isn't already active
-                  if (!$(this).hasClass("active")) {
-                      // Remove the class from anything that is active
-                      $(".Color > li.active").removeClass("active");
-                      // And make this active
-                      $(this).addClass("active");
-                  }
-              });
-
-          </script>
         <% end %>
       </div>
     <% else %>
@@ -89,25 +54,104 @@
   </div>
 <% end %>
 
-<!--<script>-->
-<!--    // Call AJAX if all options are selected, otherwise clean up.-->
-<!--    $("#product-variants select").change(function () {-->
-<!--        var option_value_ids = [];-->
-<!--        $("#product-variants select").each(function () {-->
-<!--            option_value_ids.push($(this).val());-->
-<!--        });-->
-<!--        if (option_value_ids.indexOf("") == -1) {-->
-<!--            $.ajax({-->
-<!--                url: "<%= get_variant_path(@product) %>?ids=" + option_value_ids.join(','),-->
-<!--                method: "post"-->
-<!--            });-->
-<!--        } else {-->
-<!--            $("#variant_id").val("0");-->
-<!--            $("#add-to-cart-button").prop("disabled", true);-->
-<!--            $(".out-of-stock").hide();-->
-<!--        }-->
-<!--    });-->
-<!--</script>-->
+<!-- This js only apply for size and color. if another value type in the future will custom later -->
+<script type="text/javascript">
+
+    var option_value_ids = []
+    var sizeId = -1
+    var colorId = -1
+
+    <% if @product.grouped_option_values.size == 1 %>
+
+    // When we click on the li
+    $('.size-option > li').click(function () {
+            // If this isn't already active
+            if (!$(this).hasClass("active")) {
+                // Remove the class from anything that is active
+                $(".<%= type.presentation.downcase %> > li.active").removeClass("active");
+                // And make this active
+                $(this).addClass("active");
+
+                // get and add option_value_id to option_value_ids array
+                sizeId = $(this).attr('id')
+
+                // check if array option_value_ids will
+                if (sizeId != -1 && colorId != -1) {
+                    option_value_ids.push(sizeId)
+                    option_value_ids.push(colorId)
+                    $.ajax({
+                        url: "<%= get_variant_path(@product) %>?ids=" + option_value_ids.join(','),
+                        method: "post",
+                        success: function (data) {
+                            alert(data.toString())
+                        }
+                    });
+                }
+            }
+        }
+    );
+    <% else %>  // greater than 1, mean include size and color!!
+
+    $('.size > li').click(function () {
+            // If this isn't already active
+            if (!$(this).hasClass("active")) {
+                // Remove the class from anything that is active
+                $(".size > li.active").removeClass("active");
+                // And make this active
+                $(this).addClass("active");
+
+                // get and add option_value_id to option_value_ids array
+                sizeId = $(this).attr('id')
+                alert("size " + sizeId)
+
+                if (sizeId != -1 && colorId != -1) {
+                    option_value_ids.push(sizeId)
+                    option_value_ids.push(colorId)
+                    $.ajax({
+                        url: "<%= get_variant_path(@product) %>?ids=" + option_value_ids.join(','),
+                        method: "post",
+                        success: function (data) {
+                            console.log(data)
+                            option_value_ids = []
+
+                        }
+                    });
+                }
+            }
+        }
+    );
+
+    $('.color > li').click(function () {
+            // If this isn't already active
+            if (!$(this).hasClass("active")) {
+                // Remove the class from anything that is active
+                $(".color > li.active").removeClass("active");
+                // And make this active
+                $(this).addClass("active");
+
+                // get and add option_value_id to option_value_ids array
+                colorId = $(this).attr('id')
+                alert("color "+colorId)
+
+                if (sizeId != -1 && colorId != -1) {
+                    option_value_ids.push(sizeId)
+                    option_value_ids.push(colorId)
+                    $.ajax({
+                        url: "<%= get_variant_path(@product) %>?ids=" + option_value_ids.join(','),
+                        method: "post",
+                        success: function (data) {
+                            console.log(data)
+                            option_value_ids = []
+                        }
+                    });
+                }
+            }
+        }
+    );
+
+    <% end %>
+
+</script>
 
 <!-- reference: https://stackoverflow.com/questions/34898575/spree-dropdown-boxes-for-variant-option-values -->
 <!-- it working wrong https://github.com/citrus/spree_variant_options -->

@@ -28,7 +28,7 @@ module Spree
       # self.variants.find_by(:id => variants.inject(:&).first)
       #
       #
-      self.variants.select {|variant| variant.option_value_ids == array_option_value_ids.map(&:to_i)}.first
+      self.variants.select {|variant| variant.option_value_ids.sort == array_option_value_ids.map(&:to_i).sort}.first
 
     end
 

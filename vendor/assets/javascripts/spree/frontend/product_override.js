@@ -1,4 +1,1 @@
-radios.click(function (event) {
-    alert("Hello I am working")
-})
-
+// write js function override for product.js here

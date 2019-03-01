@@ -6,4 +6,12 @@ Spree::Variant.class_eval do
   def images
     images_for_variant
   end
+
+  def image_ids
+    image_ids = []
+    self.images.each do |i|
+       image_ids.push i.id
+    end
+    return image_ids
+  end
 end
