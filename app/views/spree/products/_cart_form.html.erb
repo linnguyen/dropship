@@ -113,7 +113,7 @@
                         success: function (data) {
                             console.log(data)
                             option_value_ids = []
-
+                            Spree.showVariantImages(data)
                         }
                     });
                 }
@@ -131,7 +131,7 @@
 
                 // get and add option_value_id to option_value_ids array
                 colorId = $(this).attr('id')
-                alert("color "+colorId)
+                alert("color " + colorId)
 
                 if (sizeId != -1 && colorId != -1) {
                     option_value_ids.push(sizeId)
@@ -142,6 +142,7 @@
                         success: function (data) {
                             console.log(data)
                             option_value_ids = []
+                            Spree.showVariantImages(data)
                         }
                     });
                 }
