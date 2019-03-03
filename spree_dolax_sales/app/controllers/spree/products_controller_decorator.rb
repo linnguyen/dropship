@@ -7,7 +7,7 @@ Spree::ProductsController.class_eval do
     @variant = @product.find_variant_by_options(params[:ids].split(','))
     if @variant
       respond_to do |format|
-        format.json {render json: @variant.image_ids}
+        format.json {render json: {variant_id: @variant.id, image_ids: @variant.image_ids}}
       end
     end
   end
