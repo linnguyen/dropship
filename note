@@ -20,3 +20,9 @@
             </li>
           <% end %>
         </ul>
+
+
+        <!-- solution2: show warning to select option value -->
+         <div class="alert alert-warning" style="display: none">
+                          Please select a <%= type.name.downcase %>
+                        </div>

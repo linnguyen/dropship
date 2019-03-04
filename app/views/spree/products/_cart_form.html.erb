@@ -10,16 +10,13 @@
                 <ul class="size-option <%= type.name.downcase %>">
                   <li><span class="text-uppercase"><%= type.presentation %>:</span></li>
                   <% values.sort_by(&:position).each do |value| %>
-                    <li id= <%= value.id %>><a href="#"><%= value.presentation %></a></li>
+                    <li id="<%= value.id %>"><a href="#"><%= value.presentation %></a></li>
                   <% end %>
                 </ul>
-                <div class="alert alert-warning" style="display: none">
-                  Please select a <%= type.name.downcase %>
-                </div>
               </div>
               <% index += 1 %>
             <% end %>
-            <%= hidden_field_tag "variant_id", '', id: "hidden-variant-id" %>
+            <%= hidden_field_tag "variant_id", @product.variants.first.id, id: "hidden-variant-id" %>
           <% end %>
         </div>
       </div>
@@ -60,147 +57,15 @@
 <% end %>
 
 <%= javascript_tag do %>
-  $(document).ready(function(){
-  $('span#<%= s_or_b %>country .select2').on('change', function() {
-     update_state('<%= s_or_b %>'); });
-  });
+  <% if @product.has_variants? %>
+    window.product_id = "<%= @product.slug %>";
+    window.default_variant_option_values = "<%= @product.variants.first.option_value_ids %>";
+    window.default_variant_image_ids = "<%= @product.variants.first.image_ids %>";
+    window.option_size_id = "<%= @product.variants.first.option_values.select {|v| v.option_type_id == 1}.first.id %>"; <!-- size: 1 -->
+    window.option_color_id = "<%= @product.variants.first.option_values.select {|v| v.option_type_id == 2}.first.id %>"; <!-- color: 2 -->
+  <% end %>
 <% end %>
-
-<!-- This js only apply for size and color. if another value type in the future will custom later -->
-<script type="text/javascript">
-
-    var option_value_ids = []
-    var sizeId = -1
-    var colorId = -1
-
-    <% if @product.grouped_option_values.size == 1 %>
-    <% if @product.grouped_option_values.first[0].name.downcase == 'size' %>
-    // When we click on the li
-    $('.size > li').click(function () {
-            // If this isn't already active
-            if (!$(this).hasClass("active")) {
-                // Remove the class from anything that is active
-                $(".size > li.active").removeClass("active");
-                // And make this active
-                $(this).addClass("active");
-
-                // get and add option_value_id to option_value_ids array
-                sizeId = $(this).attr('id')
-
-                // check if array option_value_ids will
-                if (sizeId != -1) {
-                    option_value_ids.push(sizeId)
-                    $.ajax({
-                        url: "<%= get_variant_path(@product) %>?ids=" + option_value_ids.join(','),
-                        method: "post",
-                        success: function (data) {
-                            option_value_ids = []
-                            Spree.showVariantImages(data.image_ids)
-                            document.getElementById('hidden-variant-id').value = data.variant_id;
-                            alert(document.getElementById('hidden-variant-id').value)
-                        }
-                    });
-                }
-            }
-        }
-    );
-    <% end %>
-    <% if @product.grouped_option_values.first[0].name.downcase == 'color' %>
-    // When we click on the li
-    $('.color > li').click(function () {
-            // If this isn't already active
-            if (!$(this).hasClass("active")) {
-                // Remove the class from anything that is active
-                $(".color > li.active").removeClass("active");
-                // And make this active
-                $(this).addClass("active");
-
-                // get and add option_value_id to option_value_ids array
-                sizeId = $(this).attr('id')
-
-                // check if array option_value_ids will
-                if (colorId != -1) {
-                    option_value_ids.push(colorId)
-                    $.ajax({
-                        url: "<%= get_variant_path(@product) %>?ids=" + option_value_ids.join(','),
-                        method: "post",
-                        success: function (data) {
-                            option_value_ids = []
-                            Spree.showVariantImages(data.image_ids)
-                            document.getElementById('hidden-variant-id').value = data.variant_id;
-                            alert(document.getElementById('hidden-variant-id').value)
-                        }
-                    });
-                }
-            }
-        }
-    );
-    <% end %>
-    <% else %>  // greater than 1, mean include size and color!!
-
-    $('.size > li').click(function () {
-            // If this isn't already active
-            if (!$(this).hasClass("active")) {
-                // Remove the class from anything that is active
-                $(".size > li.active").removeClass("active");
-                // And make this active
-                $(this).addClass("active");
-
-                // get and add option_value_id to option_value_ids array
-                sizeId = $(this).attr('id')
-
-                if (sizeId != -1 && colorId != -1) {
-                    option_value_ids.push(sizeId)
-                    option_value_ids.push(colorId)
-                    $.ajax({
-                        url: "<%= get_variant_path(@product) %>?ids=" + option_value_ids.join(','),
-                        method: "post",
-                        success: function (data) {
-                            option_value_ids = []
-                            Spree.showVariantImages(data.image_ids)
-                            document.getElementById('hidden-variant-id').value = data.variant_id;
-                            alert(document.getElementById('hidden-variant-id').value)
-                        }
-                    });
-                }
-            }
-        }
-    );
-
-    $('.color > li').click(function () {
-            // If this isn't already active
-            if (!$(this).hasClass("active")) {
-                // Remove the class from anything that is active
-                $(".color > li.active").removeClass("active");
-                // And make this active
-                $(this).addClass("active");
-
-                // get and add option_value_id to option_value_ids array
-                colorId = $(this).attr('id')
-
-                if (sizeId != -1 && colorId != -1) {
-                    option_value_ids.push(sizeId)
-                    option_value_ids.push(colorId)
-                    $.ajax({
-                        url: "<%= get_variant_path(@product) %>?ids=" + option_value_ids.join(','),
-                        method: "post",
-                        success: function (data) {
-                            option_value_ids = []
-                            Spree.showVariantImages(data.image_ids)
-                            document.getElementById('hidden-variant-id').value = data.variant_id;
-                            alert(document.getElementById('hidden-variant-id').value)
-                        }
-                    });
-                }
-            }
-        }
-    );
-
-    <% end %>
-
-</script>
 
 <!-- reference: https://stackoverflow.com/questions/34898575/spree-dropdown-boxes-for-variant-option-values -->
 <!-- it working wrong https://github.com/citrus/spree_variant_options -->
-
 <!-- for variant image size select http://www.rootspot.com/stackoverflow/amazon/ -->
