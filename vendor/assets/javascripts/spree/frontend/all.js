@@ -15,3 +15,4 @@
 //= require spree/frontend/spree_reviews
 //= require spree/frontend/spree_paypal_express
 //= require spree/frontend/product_override
+//= require spree/frontend/taxon_override

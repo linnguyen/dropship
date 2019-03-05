@@ -8,16 +8,19 @@ Spree.ready(function ($) {
 
     // make the first variant select at default
     $(window).on('load', function () {
-        sizeId = option_size_id
-        colorId = option_color_id
-        $(".size-option #" + sizeId).addClass("active");
-        $(".size-option #" + colorId).addClass("active");
-        Spree.showVariantImages(JSON.parse(default_variant_image_ids))
-    });
-
-    function hasBothOptionType() { // both color and size
-        return $(".product-options .variant-options").length == 2
-    }
+            if (!(typeof option_size_id === 'undefined')) {
+                sizeId = option_size_id
+                alert(sizeId)
+                $(".size-option #" + sizeId).addClass("active");
+            }
+            if (!(typeof option_color_id === 'undefined')) {
+                colorId = option_color_id
+                alert(colorId)
+                $(".size-option #" + colorId).addClass("active");
+            }
+            Spree.showVariantImages(JSON.parse(default_variant_image_ids))
+        }
+    );
 
     function getVariantByAjax() {
         $.ajax({
@@ -43,7 +46,9 @@ Spree.ready(function ($) {
                 // get and add option_value_id to option_value_ids array
                 sizeId = $(this).attr('id')
 
-                if (hasBothOptionType) {
+                var hasBothType = $(".product-options .variant-options").length == 2
+
+                if (hasBothType) {
                     if (sizeId != -1 && colorId != -1) {
                         option_value_ids.push(sizeId)
                         option_value_ids.push(colorId)
@@ -68,7 +73,9 @@ Spree.ready(function ($) {
                 // get and add option_value_id to option_value_ids array
                 colorId = $(this).attr('id')
 
-                if (hasBothOptionType) {
+                var hasBothType = $(".product-options .variant-options").length == 2
+
+                if (hasBothType) {
                     if (sizeId != -1 && colorId != -1) {
                         option_value_ids.push(sizeId)
                         option_value_ids.push(colorId)

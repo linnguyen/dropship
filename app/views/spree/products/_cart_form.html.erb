@@ -61,8 +61,17 @@
     window.product_id = "<%= @product.slug %>";
     window.default_variant_option_values = "<%= @product.variants.first.option_value_ids %>";
     window.default_variant_image_ids = "<%= @product.variants.first.image_ids %>";
-    window.option_size_id = "<%= @product.variants.first.option_values.select {|v| v.option_type_id == 1}.first.id %>"; <!-- size: 1 -->
-    window.option_color_id = "<%= @product.variants.first.option_values.select {|v| v.option_type_id == 2}.first.id %>"; <!-- color: 2 -->
+
+    <% color_option = @product.variants.first.option_values.select {|v| v.option_type.name.downcase == "color"} %>
+    <% if color_option.any? %>
+      window.option_color_id = "<%= color_option.first.id %>"
+    <% end %>
+
+    <% size_option = @product.variants.first.option_values.select {|v| v.option_type.name.downcase == "size"} %>
+    <% if size_option.any? %>
+      window.option_size_id = "<%= size_option.first.id %>"
+    <% end %>
+
   <% end %>
 <% end %>
 
