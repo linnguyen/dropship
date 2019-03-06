@@ -2,6 +2,10 @@
   <h4>Import Product</h4>
   <%= form_tag admin_bulk_path, multipart: true do %>
     <%= file_field_tag :file %>
+    <h3>taxon</h3>
+    <%= select_tag :taxon_ids , options_for_select(@taxons.collect{ |r| [r.name, r.id] }) %>
+    <h3>related product</h3>
+    <%= select_tag :relation_type_id , options_for_select(@relation_type.collect{ |r| [r.name, r.id] }) %>
     <%= submit_tag "Import" %>
   <% end %>
 </div>
@@ -11,12 +15,12 @@
   <%= Spree.t(:taxons) %>
 <% end %>
 
-<div class="taxon-products-view">
-  <div class="form-group">
-    <%= text_field_tag :taxon_id %>
-  </div>
+<!--<div class="taxon-products-view">-->
+<!--  <div class="form-group">-->
+    <%#= text_field_tag :taxon_id %>
+<!--  </div>-->
 
-  <ul id="taxon_products" class="taxon"></ul>
+<!--  <ul id="taxon_products" class="taxon"></ul>-->
 
-  <%= render partial: "spree/admin/products/autocomplete", formats: :js %>
-</div>
+  <%#= render partial: "spree/admin/products/autocomplete", formats: :js %>
+<!--</div>-->

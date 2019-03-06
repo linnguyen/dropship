@@ -10,12 +10,10 @@ Spree.ready(function ($) {
     $(window).on('load', function () {
             if (!(typeof option_size_id === 'undefined')) {
                 sizeId = option_size_id
-                alert(sizeId)
                 $(".size-option #" + sizeId).addClass("active");
             }
             if (!(typeof option_color_id === 'undefined')) {
                 colorId = option_color_id
-                alert(colorId)
                 $(".size-option #" + colorId).addClass("active");
             }
             Spree.showVariantImages(JSON.parse(default_variant_image_ids))
@@ -30,7 +28,6 @@ Spree.ready(function ($) {
                 option_value_ids = []
                 Spree.showVariantImages(data.image_ids)
                 document.getElementById('hidden-variant-id').value = data.variant_id;
-                alert(document.getElementById('hidden-variant-id').value)
             }
         });
     }
@@ -89,7 +86,20 @@ Spree.ready(function ($) {
         }
     );
 
-    // override this function from spree js
+    // $(document).ready(function () {
+    //     $(".color > li").hover(
+    //         alert("co hover")
+    //     );
+    // });
+    //
+    // $('.color li').live('mouseover mouseout', function(event) {
+    //     if (event.type == 'mouseover') { alert('I m here'); }
+    //     else { alert('I m gone'); }
+    //
+    //     $(this).parent().toggleClass('over');
+    // });
+
+// override this function from spree js
     Spree.showVariantImages = function (imageIds) {
         ($('li.vtmb')).hide();
         for (let i = 0; i < imageIds.length; ++i) {
