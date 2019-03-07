@@ -3,7 +3,7 @@
   <%= form_tag admin_bulk_path, multipart: true do %>
     <%= file_field_tag :file %>
     <h3>taxon</h3>
-    <%= select_tag :taxon_ids , options_for_select(@taxons.collect{ |r| [r.name, r.id] }) %>
+    <%= select_tag :taxon_ids , options_for_select(@taxons.collect{ |r| [r.pretty_name, r.id] }) %>
     <h3>related product</h3>
     <%= select_tag :relation_type_id , options_for_select(@relation_type.collect{ |r| [r.name, r.id] }) %>
     <%= submit_tag "Import" %>
