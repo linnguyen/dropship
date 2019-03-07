@@ -50,11 +50,11 @@ Spree::Admin::ProductsController.class_eval do
           shipping_category_id: 1,
           available_on: Time.now,
       )
-      # # update taxons
-      # taxon_ids = []
-      # taxon_ids << params[:taxon_ids]
-      # product.taxon_ids = taxon_ids
-      #
+      # update taxons
+      taxon_ids = []
+      taxon_ids << params[:taxon_ids]
+      product.taxon_ids = taxon_ids
+
       # # update related product
       # relation_ids = []
       # relation_ids << params[:relation_type_id]
