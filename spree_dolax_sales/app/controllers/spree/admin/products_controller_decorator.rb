@@ -207,3 +207,7 @@ end
 # rescue StandardError => e
 #   print e
 # end
+#
+
+# Read line by line instead using CSV
+# https://stackoverflow.com/questions/35255668/ruby-wont-parse-csv-when-cell-field-contains-leading-double-quote
