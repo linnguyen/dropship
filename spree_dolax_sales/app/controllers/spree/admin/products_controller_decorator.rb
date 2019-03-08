@@ -1,6 +1,5 @@
 Spree::Admin::ProductsController.class_eval do
   require 'csv'
-
   # for scrape data
 
   require 'openssl'
@@ -12,7 +11,7 @@ Spree::Admin::ProductsController.class_eval do
   OpenURI::Buffer.const_set 'StringMax', 0
 
   def import
-    @relation_type  = Spree::RelationType.all
+    @relation_type = Spree::RelationType.all
 
     # load all taxons
     @taxons = if taxonomy
@@ -32,148 +31,159 @@ Spree::Admin::ProductsController.class_eval do
     end
   end
 
+  def bulk_upload1
+    File.readlines(params[:file].path).drop(1).each do |line|
+      CSV.parse(line) do |row|
+        puts row.inspect
+      end
+    end
+  end
+
   def bulk_upload
-    csv = File.read(params[:file].path)
-    CSV.parse(csv.gsub('\"', '""'), headers: true).each do |row|
-      # increase price by 80 or 75 percent randomly
-      increase_by = 0.90
-      if [true, false].sample
-        increase_by = 0.8
-      else
-        increase_by = 0.75
-      end
-      price_new = row[8].to_f + row[8].to_f * increase_by
-      product = Spree::Product.create(
-          name: row[1],
-          description: row[10],
-          price: price_new,
-          shipping_category_id: 1,
-          available_on: Time.now,
-      )
-      # update taxons
-      taxon_ids = []
-      taxon_ids << params[:taxon_ids]
-      product.taxon_ids = taxon_ids
-
-      # # update related product
-      # relation_ids = []
-      # relation_ids << params[:relation_type_id]
-      # product.relation_ids = relation_ids
-
-      # loop to all picture url and create product image
-      (16..25).each do |i|
-        next if row[i].nil?
-        if (!row[i].empty?)
-          encoded_url = URI.encode(row[i])
-          file = open(encoded_url)
-          image = product.images.create(attachment: {io: file, filename: File.basename(file.path)})
+    # csv = File.read(params[:file].path)
+    # CSV.parse(csv.gsub('\"', '""'), headers: true).each do |row|
+    File.readlines(params[:file].path).drop(1).each do |line|
+      CSV.parse(line) do |row|
+        # increase price by 80 or 75 percent randomly
+        increase_by = 0.90
+        if [true, false].sample
+          increase_by = 0.8
+        else
+          increase_by = 0.75
         end
-      end
+        price_new = row[8].to_f + row[8].to_f * increase_by
+        product = Spree::Product.create(
+            name: row[1],
+            description: row[10],
+            price: price_new,
+            shipping_category_id: 1,
+            available_on: Time.now,
+        )
+        # update taxons
+        taxon_ids = []
+        taxon_ids << params[:taxon_ids]
+        product.taxon_ids = taxon_ids
 
-      # create product variant if product have variants
-      next if row[15].nil? || row[15].empty?
+        # # update related product
+        # relation_ids = []
+        # relation_ids << params[:relation_type_id]
+        # product.relation_ids = relation_ids
 
-      # get doc scrape data from banggood
-      url = row[13]
-      doc = Nokogiri::HTML(open(url))
-      number_of_tr = doc.css('div.pro_attr_box table tr')
-      # only size or color
-      if (number_of_tr.size == 2)
-        data_doc = doc.css('div.pro_attr_box table tr[1] td li')
-      end
-      # both size and color
-      if (number_of_tr.size == 3)
-        data_doc = doc.css('div.pro_attr_box table tr[2] td li')
-      end
-      images_hash = Hash.new
-      imageid_hash = Hash.new
-      data_doc.each do |image_li|
-        image = image_li.css('img')
-        next if image.empty?
-        name_color = image.attr('title').value.strip
-        url = image_li.css('img').attr('viewimage').value
-        images_hash[name_color] = url
-      end
-
-
-      options_value = row[15].split("/")
-      options_value.each do |option_value|
-        if (option_value.include? "Size") && (option_value.include? "Color")
-          # both size and color
-          i = option_value.index("Size")
-          j = option_value.index("Color")
-          size = option_value[i..j - 1].gsub('Size', '').strip
-          color = option_value.from(j).gsub('Color', '').strip
-
-          sizeOptionValue = find_or_create_option_value 1, size
-          colorOptionValue = find_or_create_option_value 2, color
-          option_value_ids = []
-          option_value_ids << sizeOptionValue.id
-          option_value_ids << colorOptionValue.id
-
-          # create variant
-          variant = product.variants.create(price: product.price, option_value_ids: option_value_ids)
-
-          # create variant image here by scrape data from banggood
-          if (!images_hash.empty?)
-            variant_url = images_hash[colorOptionValue.presentation]
-            encoded_url = URI.encode(variant_url)
+        # loop to all picture url and create product image
+        (16..25).each do |i|
+          next if row[i].nil?
+          if (!row[i].empty?)
+            encoded_url = URI.encode(row[i])
             file = open(encoded_url)
-            if imageid_hash.key?(colorOptionValue.presentation)
-              variant.images << Spree::Asset.find(imageid_hash[colorOptionValue.presentation])
-            else
-              image = variant.images.create(attachment: {io: file, filename: File.basename(file.path)})
-              imageid_hash[colorOptionValue.presentation] = image.id
-            end
+            image = product.images.create(attachment: {io: file, filename: File.basename(file.path)})
           end
+        end
 
-        elsif (option_value.include? "Size") && !(option_value.include? "Color")
-          # only size
-          size = option_value.gsub('Size', '').strip
-          sizeOptionValue = find_or_create_option_value 1, size
-          option_value_ids = []
-          option_value_ids << sizeOptionValue.id
+        # create product variant if product have variants
+        next if row[15].nil? || row[15].empty?
 
-          # create variant
-          variant = product.variants.create(price: product.price, option_value_ids: option_value_ids)
+        # get doc scrape data from banggood
+        url = row[13]
+        doc = Nokogiri::HTML(open(url))
+        number_of_tr = doc.css('div.pro_attr_box table tr')
+        # only size or color
+        if (number_of_tr.size == 2)
+          data_doc = doc.css('div.pro_attr_box table tr[1] td li')
+        end
+        # both size and color
+        if (number_of_tr.size == 3)
+          data_doc = doc.css('div.pro_attr_box table tr[2] td li')
+        end
+        images_hash = Hash.new
+        imageid_hash = Hash.new
+        data_doc.each do |image_li|
+          image = image_li.css('img')
+          next if image.empty?
+          name_color = image.attr('title').value.strip
+          url = image_li.css('img').attr('viewimage').value
+          images_hash[name_color] = url
+        end
 
-          # create variant image here by scrape data from banggood
-          if (!images_hash.empty?)
-            variant_url = images_hash[colorOptionValue.presentation]
-            encoded_url = URI.encode(variant_url)
-            file = open(encoded_url)
-            if imageid_hash.key?(colorOptionValue.presentation)
-              variant.images << Spree::Asset.find(imageid_hash[colorOptionValue.presentation])
-            else
-              image = variant.images.create(attachment: {io: file, filename: File.basename(file.path)})
-              imageid_hash[colorOptionValue.presentation] = image.id
+
+        options_value = row[15].split("/")
+        options_value.each do |option_value|
+          if (option_value.include? "Size") && (option_value.include? "Color")
+            # both size and color
+            i = option_value.index("Size")
+            j = option_value.index("Color")
+            size = option_value[i..j - 1].gsub('Size', '').strip
+            color = option_value.from(j).gsub('Color', '').strip
+
+            sizeOptionValue = find_or_create_option_value 1, size
+            colorOptionValue = find_or_create_option_value 2, color
+            option_value_ids = []
+            option_value_ids << sizeOptionValue.id
+            option_value_ids << colorOptionValue.id
+
+            # create variant
+            variant = product.variants.create(price: product.price, option_value_ids: option_value_ids)
+
+            # create variant image here by scrape data from banggood
+            if (!images_hash.empty?)
+              variant_url = images_hash[colorOptionValue.presentation]
+              encoded_url = URI.encode(variant_url)
+              file = open(encoded_url)
+              if imageid_hash.key?(colorOptionValue.presentation)
+                variant.images << Spree::Asset.find(imageid_hash[colorOptionValue.presentation])
+              else
+                image = variant.images.create(attachment: {io: file, filename: File.basename(file.path)})
+                imageid_hash[colorOptionValue.presentation] = image.id
+              end
             end
-          end
 
-        elsif !(option_value.include? "Size") && (option_value.include? "Color")
-          # only color
-          color = option_value.gsub('Color', '').strip
-          colorOptionValue = find_or_create_option_value 2, color
-          option_value_ids = []
-          option_value_ids << colorOptionValue.id
+          elsif (option_value.include? "Size") && !(option_value.include? "Color")
+            # only size
+            size = option_value.gsub('Size', '').strip
+            sizeOptionValue = find_or_create_option_value 1, size
+            option_value_ids = []
+            option_value_ids << sizeOptionValue.id
 
-          # create variant
-          variant = product.variants.create(price: product.price, option_value_ids: option_value_ids)
+            # create variant
+            variant = product.variants.create(price: product.price, option_value_ids: option_value_ids)
 
-          # create variant image here by scrape data from banggood
-          if (!images_hash.empty?)
-            variant_url = images_hash[colorOptionValue.presentation]
-            encoded_url = URI.encode(variant_url)
-            file = open(encoded_url)
-            if imageid_hash.key?(colorOptionValue.presentation)
-              variant.images << Spree::Asset.find(imageid_hash[colorOptionValue.presentation])
-            else
-              next if !file.path.present?
-              image = variant.images.create(attachment: {io: file, filename: File.basename(file.path)})
-              imageid_hash[colorOptionValue.presentation] = image.id
+            # create variant image here by scrape data from banggood
+            if (!images_hash.empty?)
+              variant_url = images_hash[colorOptionValue.presentation]
+              encoded_url = URI.encode(variant_url)
+              file = open(encoded_url)
+              if imageid_hash.key?(colorOptionValue.presentation)
+                variant.images << Spree::Asset.find(imageid_hash[colorOptionValue.presentation])
+              else
+                image = variant.images.create(attachment: {io: file, filename: File.basename(file.path)})
+                imageid_hash[colorOptionValue.presentation] = image.id
+              end
             end
-          end
 
+          elsif !(option_value.include? "Size") && (option_value.include? "Color")
+            # only color
+            color = option_value.gsub('Color', '').strip
+            colorOptionValue = find_or_create_option_value 2, color
+            option_value_ids = []
+            option_value_ids << colorOptionValue.id
+
+            # create variant
+            variant = product.variants.create(price: product.price, option_value_ids: option_value_ids)
+
+            # create variant image here by scrape data from banggood
+            if (!images_hash.empty?)
+              variant_url = images_hash[colorOptionValue.presentation]
+              encoded_url = URI.encode(variant_url)
+              file = open(encoded_url)
+              if imageid_hash.key?(colorOptionValue.presentation)
+                variant.images << Spree::Asset.find(imageid_hash[colorOptionValue.presentation])
+              else
+                next if !file.path.present?
+                image = variant.images.create(attachment: {io: file, filename: File.basename(file.path)})
+                imageid_hash[colorOptionValue.presentation] = image.id
+              end
+            end
+
+          end
         end
       end
 
@@ -211,3 +221,6 @@ end
 
 # Read line by line instead using CSV
 # https://stackoverflow.com/questions/35255668/ruby-wont-parse-csv-when-cell-field-contains-leading-double-quote
+# Using smart csv to import the large file
+# https://stackoverflow.com/questions/45718986/how-to-best-import-and-process-very-large-csv-files-with-rails
+# https://tylertringas.com/very-large-csv-import-in-rails-on-heroku/
