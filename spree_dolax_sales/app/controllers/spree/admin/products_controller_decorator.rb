@@ -87,7 +87,7 @@ Spree::Admin::ProductsController.class_eval do
           # get doc scrape data from banggood
           url = row[13]
           doc = Nokogiri::HTML(open(url))
-          if (url.include? "sea")
+          if (url.start_with? "https://us") # banggood usa
             number_of_tr = doc.css('div.pro_attr_box table tr')
             # only size or color
             if (number_of_tr.size == 2)
@@ -108,7 +108,7 @@ Spree::Admin::ProductsController.class_eval do
             end
           end
 
-          if (url.include? "sea") # china
+          if (url.start_with? "https://sea") # china
             data_doc = doc.css('div.color_list ul li')
             # only size or color
             images_hash = Hash.new
@@ -142,6 +142,9 @@ Spree::Admin::ProductsController.class_eval do
               # create variant image here by scrape data from banggood
               if (!images_hash.empty?)
                 variant_url = images_hash[colorOptionValue.presentation]
+                if variant_url.nil? # incase can not find url for variant, run next variant
+                  next
+                end
                 encoded_url = URI.encode(variant_url)
                 file = open(encoded_url)
                 if imageid_hash.key?(colorOptionValue.presentation)
@@ -165,6 +168,9 @@ Spree::Admin::ProductsController.class_eval do
               # create variant image here by scrape data from banggood
               if (!images_hash.empty?)
                 variant_url = images_hash[colorOptionValue.presentation]
+                if variant_url.nil? # incase can not find url for variant, run next variant
+                  next
+                end
                 encoded_url = URI.encode(variant_url)
                 file = open(encoded_url)
                 if imageid_hash.key?(colorOptionValue.presentation)
@@ -188,6 +194,9 @@ Spree::Admin::ProductsController.class_eval do
               # create variant image here by scrape data from banggood
               if (!images_hash.empty?)
                 variant_url = images_hash[colorOptionValue.presentation]
+                if variant_url.nil? # incase can not find url for variant, run next variant
+                  next
+                end
                 encoded_url = URI.encode(variant_url)
                 file = open(encoded_url)
                 if imageid_hash.key?(colorOptionValue.presentation)
