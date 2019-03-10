@@ -225,7 +225,7 @@ Spree::Admin::ProductsController.class_eval do
 
     end
 
-    flash[:notice] = "Products imported! , Fail: "+ fail
+    flash[:notice] = "Products imported!"
     redirect_to admin_import_path
   end
 
