@@ -19,3 +19,122 @@
     </div>
   </div>
 </div>
+
+<p>Find me in app/views/ebay/get_product.html.erb</p>
+
+<button id="btnSubmit">get data</button>
+
+<button id="btnFetch">fetch official time</button>
+<script>
+    $(document).ready(function () {
+        $("#btnSubmit").click(function () {
+
+
+            var wsUrl = "https://api.ebay.com/ws/api.dll";
+
+            // var soapRequest =
+            //     '<?xml version="1.0" encoding="utf-8"?> \
+            //     <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" \
+            //         xmlns:xsd="http://www.w3.org/2001/XMLSchema" \
+            //         xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"> \
+            //       <soap:Body> \
+            //         <WMLogin xmlns="http://tempuri.org/"> \
+            //           <sUserName>' + username + '</sUserName> \
+            //           <sPassword>' + password + '</sPassword> \
+            //           <sAppKey>' + appKey + '</sAppKey> \
+            //         </WMLogin> \
+            //       </soap:Body> \
+            //     </soap:Envelope>';
+
+            var soapRequest1 = '<?xml version="1.0" encoding="utf-8"?>\n' +
+                '<GetSellerListRequest xmlns="urn:ebay:apis:eBLBaseComponents">\n' +
+                '  <RequesterCredentials>\n' +
+                '    <eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**YDCHXA**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6ADloOoCZCHoQydj6x9nY+seQ**8toFAA**AAMAAA**GUveEELf6OyzywF1LZ2AxnLxoiLtqd0fUFtlgBBHlFcJq+f4tYfRp6Hu/u3otqXoxamaN2dNjjZxAXfFvCgEYKyW40ZZFLlb2Pnql1rQmrNRILlBWp/W6JMu7NgLPUm4u0rGujHC36FFU+2AsFdq3RUulbUYXWcJmxgeRYKQYbIVYj6+3dTzbK29OS0dZW4G10ekYLN81//OWdVHL/s208sF6YDxfljGJa2gXEFxLZcHpa4GnVLhLiTqMnP7PF7EPPVT8k540EoVFoShsjJ7XGFE5hdaR+TRXY5l5g/kaGPYrOOxvSHEgK2LELx5q1TlIX9LY25bA4y4xtJwCuOXCKdjN1lJAugAartDhsyFaFNI3sn+4+N43O9VwyJv9Yez+ycQSuTVnnIbB7yO/wvW5DuAVRGMTmzeamStTyoRVplkDLGoumCIhgDX4s52aSuD9MJaKBoJIJmwBi1tNjILeQfQsAb+zT0UTMJ8yF+/yy/Xu517mbyvfEuu3eTnVMMaXwNTDdNC2bcICUX22/sBVRj+qRpJFkuVTVTx9pVZvOJfwjw6HTC53BNkJ7xb/hHT0Rp6aHKbqsJ5D2yRPZX5FxThwO8yp7pbiiDVJthYCyUEheKVaSO/Z2uM7kvRUXZi2C0eQQ94SWik+tjto2LDHZXUUXgqIOPeQb46rnh0F5NmoS1OOpAlV/XghGyAYPHg6qY+fsabmldkPgA3SLCUik4NmArm2+HdAS7G48wr8uJkxphmeVtGvf3KTqLM8iLv</eBayAuthToken>\n' +
+                '  </RequesterCredentials>\n' +
+                '  <ErrorLanguage>en_US</ErrorLanguage>\n' +
+                '  <WarningLevel>High</WarningLevel>\n' +
+                '  <GranularityLevel>Coarse</GranularityLevel> \n' +
+                '  <StartTimeFrom>2018-11-01T21:59:59.005Z</StartTimeFrom> \n' +
+                '  <StartTimeTo>2019-01-26T21:59:59.005Z</StartTimeTo> \n' +
+                '  <IncludeWatchCount>true</IncludeWatchCount> \n' +
+                '  <Pagination> \n' +
+                '    <EntriesPerPage>2</EntriesPerPage> \n' +
+                '  </Pagination> \n' +
+                '</GetSellerListRequest>';
+
+            $.ajax({
+                type: "POST",
+                url: wsUrl,
+                xhrFields: {
+                    withCredentials: true
+                },
+                contentType: "text/xml",
+                headers: {
+                    'Content-Type':'text/xml',
+                    'X-EBAY-API-COMPATIBILITY-LEVEL':'911',
+                    'X-EBAY-API-SITEID':'0',
+                    'X-EBAY-API-CALL-NAME':'GeteBayOfficialTime'
+                },
+                dataType: "xml",
+                data: soapRequest1,
+                success: processSuccess,
+                error: processError,
+                contentType: "text/xml; charset=\"utf-8\"",
+
+            });
+
+
+        });
+
+        function processSuccess(data, status, req) {
+            if (status == "success") {
+                alert("success")
+
+            }
+        }
+
+        function processError(data, status, req) {
+
+            if (status == "error")
+                alert("eror")
+        }
+
+
+        $("#btnFetch").click(function () {
+            var wsUrl = "https://api.ebay.com/ws/api.dll";
+
+            // var soapRequest =
+            //     '<?xml version="1.0" encoding="utf-8"?> \
+            //     <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" \
+            //         xmlns:xsd="http://www.w3.org/2001/XMLSchema" \
+            //         xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"> \
+            //       <soap:Body> \
+            //         <WMLogin xmlns="http://tempuri.org/"> \
+            //           <sUserName>' + username + '</sUserName> \
+            //           <sPassword>' + password + '</sPassword> \
+            //           <sAppKey>' + appKey + '</sAppKey> \
+            //         </WMLogin> \
+            //       </soap:Body> \
+            //     </soap:Envelope>';
+
+            var soapRequest2 = '<?xml version="1.0" encoding="utf-8"?>\n' +
+                '<GeteBayOfficialTimeRequest xmlns="urn:ebay:apis:eBLBaseComponents">\n' +
+                '  <RequesterCredentials>\n' +
+                '    <eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**YDCHXA**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6ADloOoCZCHoQydj6x9nY+seQ**8toFAA**AAMAAA**GUveEELf6OyzywF1LZ2AxnLxoiLtqd0fUFtlgBBHlFcJq+f4tYfRp6Hu/u3otqXoxamaN2dNjjZxAXfFvCgEYKyW40ZZFLlb2Pnql1rQmrNRILlBWp/W6JMu7NgLPUm4u0rGujHC36FFU+2AsFdq3RUulbUYXWcJmxgeRYKQYbIVYj6+3dTzbK29OS0dZW4G10ekYLN81//OWdVHL/s208sF6YDxfljGJa2gXEFxLZcHpa4GnVLhLiTqMnP7PF7EPPVT8k540EoVFoShsjJ7XGFE5hdaR+TRXY5l5g/kaGPYrOOxvSHEgK2LELx5q1TlIX9LY25bA4y4xtJwCuOXCKdjN1lJAugAartDhsyFaFNI3sn+4+N43O9VwyJv9Yez+ycQSuTVnnIbB7yO/wvW5DuAVRGMTmzeamStTyoRVplkDLGoumCIhgDX4s52aSuD9MJaKBoJIJmwBi1tNjILeQfQsAb+zT0UTMJ8yF+/yy/Xu517mbyvfEuu3eTnVMMaXwNTDdNC2bcICUX22/sBVRj+qRpJFkuVTVTx9pVZvOJfwjw6HTC53BNkJ7xb/hHT0Rp6aHKbqsJ5D2yRPZX5FxThwO8yp7pbiiDVJthYCyUEheKVaSO/Z2uM7kvRUXZi2C0eQQ94SWik+tjto2LDHZXUUXgqIOPeQb46rnh0F5NmoS1OOpAlV/XghGyAYPHg6qY+fsabmldkPgA3SLCUik4NmArm2+HdAS7G48wr8uJkxphmeVtGvf3KTqLM8iLv</eBayAuthToken>\n' +
+                '  </RequesterCredentials>\n' +
+                '</GeteBayOfficialTimeRequest>';
+
+            $.ajax({
+                type: "POST",
+                url: wsUrl,
+                contentType: "text/xml",
+                dataType: "xml",
+                data: soapRequest2,
+                success: processSuccess,
+                error: processError,
+                contentType: "text/xml; charset=\"utf-8\"",
+
+            });
+        });
+    });
+</script>
